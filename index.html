@@ -1,1 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Test Constitución Española</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {}
+            }
+        }
+    </script>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .disabled-option { opacity: 0.6; pointer-events: none; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Botón Modo Oscuro Global -->
+    <div class="absolute top-4 right-4 sm:top-6 sm:right-6 z-50">
+        <button onclick="toggleTheme()" class="w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-md flex items-center justify-center text-xl text-gray-600 dark:text-yellow-400 border border-gray-200 dark:border-gray-700 active:scale-95 transition-transform">
+            <i id="theme-icon" class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <div id="app-container" class="flex-grow flex flex-col items-center p-3 sm:p-6 w-full max-w-3xl mx-auto">
+        
+        <!-- PANTALLA DE INICIO -->
+        <div id="screen-home" class="w-full flex flex-col items-center justify-center min-h-[85vh] fade-in">
+            <div class="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-3xl shadow-xl text-center w-full border-t-4 border-blue-600 dark:border-blue-500 border border-gray-100 dark:border-gray-700 transition-colors">
+                <i class="fas fa-book-open text-6xl sm:text-7xl text-blue-600 dark:text-blue-500 mb-6 drop-shadow-md"></i>
+                <h1 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">TEST PARA MONGOLOS</h1>
+                
+                <!-- Imagen añadida desde GitHub -->
+                <img src="https://raw.githubusercontent.com/AVS-PROJECTS33/Testconstitucion/main/Image%20(19).jpg" 
+                     alt="Imagen Test Constitución" 
+                     class="w-48 sm:w-56 h-auto mx-auto mb-6 rounded-2xl shadow-lg border-4 border-gray-50 dark:border-gray-700 object-cover"
+                     onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=Imagen+No+Disponible'">
+
+                <p class="text-lg text-gray-500 dark:text-gray-400 mb-10 font-medium">Constitución Española 1978</p>
+                <button onclick="navigate('setup')" class="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-bold py-4 sm:py-5 px-8 rounded-2xl text-xl sm:text-2xl shadow-lg shadow-blue-500/30 transform transition active:scale-95">
+                    INICIAR TEST <i class="fas fa-play ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- PANTALLA DE CONFIGURACIÓN -->
+        <div id="screen-setup" class="w-full hidden fade-in flex-col h-full pt-16 sm:pt-10">
+            <button onclick="navigate('home')" class="mb-4 text-gray-600 dark:text-gray-400 font-bold self-start active:scale-95 transition"><i class="fas fa-arrow-left mr-2"></i>Volver</button>
+            <div class="bg-white dark:bg-gray-800 p-5 sm:p-6 rounded-3xl shadow-xl w-full border border-gray-100 dark:border-gray-700 flex-grow flex flex-col">
+                <h2 class="text-2xl font-black mb-6 text-gray-800 dark:text-white flex items-center"><i class="fas fa-cog text-blue-500 mr-3"></i>Configurar</h2>
+                
+                <div class="space-y-6 flex-grow">
+                    <!-- Tema -->
+                    <div>
+                        <label class="block text-sm sm:text-base font-bold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">1. Selecciona el Tema</label>
+                        <select id="config-topic" class="w-full bg-gray-50 dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white rounded-2xl focus:ring-blue-500 focus:border-blue-500 block p-4 text-lg font-medium outline-none transition appearance-none">
+                            <option value="all">🌐 Examen Global (Mezclado)</option>
+                            <optgroup label="Títulos">
+                                <option value="preliminar">Título Preliminar (Art. 1-9)</option>
+                                <option value="titulo1">Título I: Derechos (Art. 10-55)</option>
+                                <option value="titulo2">Título II: La Corona (Art. 56-65)</option>
+                                <option value="titulo3">Título III: Las Cortes (Art. 66-94)</option>
+                                <option value="titulo4">Título IV: Gobierno (Art. 97-107)</option>
+                                <option value="titulo5">Título V: Relaciones (Art. 108-115)</option>
+                                <option value="titulo6">Título VI: P. Judicial (Art. 117-127)</option>
+                                <option value="titulo7">Título VII: Economía (Art. 128-136)</option>
+                                <option value="titulo8">Título VIII: Organización (Art. 137-158)</option>
+                                <option value="titulo9">Título IX: Tribunal Const. (Art. 159-165)</option>
+                                <option value="titulo10">Título X: Reforma (Art. 166-169)</option>
+                            </optgroup>
+                            <optgroup label="Especiales">
+                                <option value="plazos">⏱️ Plazos y Números</option>
+                                <option value="mayorias">⚖️ Mayorías (Absoluta, 3/5...)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <!-- Modo -->
+                    <div>
+                        <label class="block text-sm sm:text-base font-bold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">2. Modalidad (Max. 20 Preguntas)</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <label class="flex items-center p-4 sm:p-5 border-2 rounded-2xl cursor-pointer transition border-blue-500 bg-blue-50 dark:bg-blue-900/30 dark:border-blue-400" id="label-mode-study" onclick="selectMode('study')">
+                                <input type="radio" name="mode" value="study" class="hidden" checked>
+                                <div>
+                                    <span class="block font-bold text-blue-700 dark:text-blue-300 text-lg"><i class="fas fa-book-reader mr-2"></i>Modo Estudio</span>
+                                    <span class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1 block">Corrige al instante. Verás el Artículo de inmediato.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-center p-4 sm:p-5 border-2 rounded-2xl cursor-pointer transition border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800" id="label-mode-exam" onclick="selectMode('exam')">
+                                <input type="radio" name="mode" value="exam" class="hidden">
+                                <div>
+                                    <span class="block font-bold text-gray-700 dark:text-gray-200 text-lg"><i class="fas fa-stopwatch mr-2"></i>Modo Examen</span>
+                                    <span class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1 block">Con cronómetro. Nota y fallos al finalizar.</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="startQuiz()" class="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-bold py-4 rounded-2xl text-xl shadow-lg transition active:scale-95 mt-8">
+                    COMENZAR <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- PANTALLA DE TEST -->
+        <div id="screen-quiz" class="w-full hidden fade-in flex-col h-full min-h-[90vh]">
+            
+            <div class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-2xl shadow-sm mb-4 flex justify-between items-center sticky top-2 z-10 border border-gray-100 dark:border-gray-700">
+                <div class="flex items-center gap-3">
+                    <button onclick="confirmExit()" class="w-10 h-10 flex justify-center items-center text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition bg-gray-100 dark:bg-gray-700 rounded-xl active:scale-90"><i class="fas fa-times text-xl"></i></button>
+                    <div>
+                        <div class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 uppercase font-black tracking-widest line-clamp-1" id="quiz-topic-display">Tema</div>
+                        <div class="text-base sm:text-lg font-black text-blue-600 dark:text-blue-400">Preg. <span id="current-q-num">1</span>/<span id="total-q-num">20</span></div>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div id="timer-display" class="hidden text-lg sm:text-xl font-mono font-bold text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 px-3 py-1 rounded-xl">00:00</div>
+                </div>
+            </div>
+
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mb-4 overflow-hidden">
+                <div id="progress-bar" class="bg-blue-600 dark:bg-blue-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-5 sm:p-8 rounded-3xl shadow-md mb-4 flex-grow border border-gray-100 dark:border-gray-700 flex flex-col">
+                <h2 id="question-text" class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-6 sm:mb-8 leading-snug">¿Pregunta?</h2>
+                
+                <div id="options-container" class="space-y-3 sm:space-y-4 flex-grow">
+                    <!-- Opciones inyectadas via JS -->
+                </div>
+
+                <div id="feedback-container" class="hidden mt-6 p-4 sm:p-5 rounded-2xl border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20 fade-in">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-info-circle text-blue-500 dark:text-blue-400 text-2xl mt-1 shrink-0"></i>
+                        <div>
+                            <h4 class="font-extrabold text-blue-900 dark:text-blue-300 mb-1 text-base sm:text-lg">Justificación:</h4>
+                            <p id="feedback-article" class="text-xs sm:text-sm font-bold bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-100 inline-block px-2 py-1 rounded mb-2"></p>
+                            <p id="feedback-text" class="text-sm sm:text-base text-blue-900 dark:text-blue-200 font-medium leading-relaxed"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-auto pb-4 sm:pb-8 w-full">
+                <button id="btn-next" onclick="nextQuestion()" class="hidden w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-bold py-4 rounded-2xl shadow-lg transition active:scale-95 text-xl">
+                    Siguiente <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+                <button id="btn-finish" onclick="finishQuiz()" class="hidden w-full bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white font-bold py-4 rounded-2xl shadow-lg transition active:scale-95 text-xl">
+                    Finalizar Test <i class="fas fa-check-circle ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- PANTALLA DE RESULTADOS -->
+        <div id="screen-results" class="w-full hidden fade-in pt-12 sm:pt-6">
+            <div class="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-3xl shadow-xl text-center mb-6 border-t-4 border-green-500 dark:border-green-400 border border-gray-100 dark:border-gray-700">
+                <h2 class="text-3xl font-black text-gray-800 dark:text-white mb-2">¡Completado!</h2>
+                <p class="text-gray-500 dark:text-gray-400 mb-6 font-medium text-sm sm:text-base" id="result-mode-text"></p>
+                
+                <div class="mb-6 p-6 bg-gray-50 dark:bg-gray-900 rounded-2xl border-2 border-gray-100 dark:border-gray-700">
+                    <div class="text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">Nota Final</div>
+                    <div class="text-6xl font-black" id="res-score">0.00</div>
+                    <div class="text-xs text-gray-500 dark:text-gray-400 mt-2 font-bold uppercase">Sobre 10 puntos</div>
+                </div>
+
+                <div class="flex justify-center gap-3 sm:gap-4 mb-8">
+                    <div class="flex-1 p-3 sm:p-4 bg-green-50 dark:bg-green-900/20 rounded-2xl border border-green-200 dark:border-green-800/50">
+                        <div class="text-3xl sm:text-4xl font-black text-green-600 dark:text-green-400" id="res-correct">0</div>
+                        <div class="text-[10px] sm:text-xs text-green-700 dark:text-green-500 font-bold uppercase mt-1">Aciertos</div>
+                    </div>
+                    <div class="flex-1 p-3 sm:p-4 bg-red-50 dark:bg-red-900/20 rounded-2xl border border-red-200 dark:border-red-800/50">
+                        <div class="text-3xl sm:text-4xl font-black text-red-600 dark:text-red-400" id="res-wrong">0</div>
+                        <div class="text-[10px] sm:text-xs text-red-700 dark:text-red-500 font-bold uppercase mt-1">Fallos</div>
+                    </div>
+                    <div class="flex-1 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl border border-gray-200 dark:border-gray-600">
+                        <div class="text-3xl sm:text-4xl font-black text-gray-600 dark:text-gray-300" id="res-blank">0</div>
+                        <div class="text-[10px] sm:text-xs text-gray-700 dark:text-gray-400 font-bold uppercase mt-1">Blancos</div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button onclick="navigate('home')" class="w-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-bold py-4 rounded-2xl transition active:scale-95 text-lg">
+                        <i class="fas fa-home mr-2"></i>Inicio
+                    </button>
+                    <button onclick="startQuiz(true)" class="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-bold py-4 rounded-2xl shadow-lg transition active:scale-95 text-lg">
+                        <i class="fas fa-redo mr-2"></i>Repetir Test
+                    </button>
+                </div>
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-black text-gray-800 dark:text-white mb-4 px-2 flex items-center"><i class="fas fa-tasks mr-3 text-blue-600 dark:text-blue-400"></i>Revisión</h3>
+            <div id="review-container" class="space-y-4 pb-12">
+                <!-- Inyectado via JS -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MODAL CUSTOM PARA ALERTAS Y CONFIRMACIONES -->
+    <div id="custom-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex items-center justify-center fade-in p-4">
+        <div class="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-3xl shadow-2xl max-w-sm w-full text-center border border-gray-100 dark:border-gray-700">
+            <i id="modal-icon" class="fas fa-exclamation-triangle text-4xl sm:text-5xl text-yellow-500 mb-4 drop-shadow-sm"></i>
+            <h3 id="modal-title" class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">Atención</h3>
+            <p id="modal-text" class="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-6 font-medium">¿Estás seguro?</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center w-full">
+                <button id="modal-btn-cancel" class="hidden w-full px-5 py-4 rounded-2xl bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white font-bold transition hover:bg-gray-300 dark:hover:bg-gray-600 active:scale-95 text-lg">Cancelar</button>
+                <button id="modal-btn-confirm" class="w-full px-5 py-4 rounded-2xl bg-blue-600 text-white font-bold transition hover:bg-blue-700 shadow-lg active:scale-95 text-lg">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- GESTIÓN MODO OSCURO ---
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeIcon(isDark);
+        }
+
+        function updateThemeIcon(isDark) {
+            const icon = document.getElementById('theme-icon');
+            if(isDark) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            updateThemeIcon(true);
+        } else {
+            updateThemeIcon(false);
+        }
+
+
+        // ==========================================
+        // BASE DE DATOS DE LA CONSTITUCIÓN (+200 PREGUNTAS)
+        // ==========================================
+        const questionDatabase = [
+            // --- TÍTULO PRELIMINAR ---
+            { id: 1, topic: "preliminar", tags: [], question: "Según el artículo 1.1 de la Constitución, España se constituye en un Estado:", options: ["Social y democrático de Derecho", "Democrático y social de Derecho", "Social, democrático y soberano", "De Derecho, social y democrático"], correctIndex: 0, article: "Art. 1.1 CE", feedback: "España se constituye en un Estado social y democrático de Derecho." },
+            { id: 2, topic: "preliminar", tags: [], question: "¿En quién reside la soberanía nacional?", options: ["En el Rey", "En las Cortes Generales", "En el pueblo español", "En el Gobierno"], correctIndex: 2, article: "Art. 1.2 CE", feedback: "La soberanía nacional reside en el pueblo español, del que emanan los poderes del Estado." },
+            { id: 3, topic: "preliminar", tags: [], question: "La forma política del Estado español es:", options: ["La Monarquía parlamentaria", "La Monarquía constitucional", "La República federal", "El Estado autonómico"], correctIndex: 0, article: "Art. 1.3 CE", feedback: "La forma política del Estado español es la Monarquía parlamentaria." },
+            { id: 4, topic: "preliminar", tags: [], question: "¿Qué artículo consagra la indisoluble unidad de la Nación española?", options: ["Artículo 1", "Artículo 2", "Artículo 3", "Artículo 8"], correctIndex: 1, article: "Art. 2 CE", feedback: "La Constitución se fundamenta en la indisoluble unidad de la Nación española..." },
+            { id: 5, topic: "preliminar", tags: [], question: "El castellano es la lengua española oficial del Estado. Todos los españoles tienen el deber de conocerla y el derecho a:", options: ["Usarla", "Escribirla", "Hablarla", "Aprenderla"], correctIndex: 0, article: "Art. 3.1 CE", feedback: "...tienen el deber de conocerla y el derecho a usarla." },
+            { id: 6, topic: "preliminar", tags: [], question: "Las demás lenguas españolas serán también oficiales en:", options: ["Todo el territorio nacional", "Las respectivas Comunidades Autónomas de acuerdo con sus Estatutos", "Donde lo determine una Ley Orgánica", "Las provincias con bilingüismo"], correctIndex: 1, article: "Art. 3.2 CE", feedback: "Las demás lenguas españolas serán también oficiales en las respectivas Comunidades Autónomas de acuerdo con sus Estatutos." },
+            { id: 7, topic: "preliminar", tags: [], question: "La bandera de España está formada por tres franjas horizontales, roja, amarilla y roja, siendo la amarilla de anchura:", options: ["Igual a cada una de las rojas", "Doble de cada una de las rojas", "Triple de cada una de las rojas", "No especifica anchura en la CE"], correctIndex: 1, article: "Art. 4.1 CE", feedback: "...siendo la amarilla de doble anchura que cada una de las rojas." },
+            { id: 8, topic: "preliminar", tags: [], question: "La capital del Estado es la villa de:", options: ["Madrid", "Toledo", "Barcelona", "No se cita en la Constitución"], correctIndex: 0, article: "Art. 5 CE", feedback: "La capital del Estado es la villa de Madrid." },
+            { id: 9, topic: "preliminar", tags: [], question: "Los partidos políticos expresan el pluralismo político. Su creación y el ejercicio de su actividad son libres dentro del respeto a:", options: ["La Ley Orgánica de Partidos Políticos", "La Constitución y a la ley", "Al Rey y las Cortes", "A los derechos fundamentales"], correctIndex: 1, article: "Art. 6 CE", feedback: "Su creación y el ejercicio de su actividad son libres dentro del respeto a la Constitución y a la ley." },
+            { id: 10, topic: "preliminar", tags: [], question: "¿A quién corresponde promover las condiciones para que la libertad y la igualdad del individuo sean reales y efectivas?", options: ["Al Gobierno", "A los poderes públicos", "Al Rey", "Al Tribunal Constitucional"], correctIndex: 1, article: "Art. 9.2 CE", feedback: "Corresponde a los poderes públicos promover las condiciones para que la libertad y la igualdad... sean reales y efectivas." },
+            { id: 11, topic: "preliminar", tags: [], question: "Las Fuerzas Armadas están constituidas por:", options: ["El Ejército de Tierra, la Armada, el Ejército del Aire y la Guardia Civil", "El Ejército de Tierra, la Armada y el Ejército del Aire", "Ejército de Tierra, Mar y Aire", "Fuerzas y Cuerpos de Seguridad del Estado"], correctIndex: 1, article: "Art. 8.1 CE", feedback: "Las Fuerzas Armadas, constituidas por el Ejército de Tierra, la Armada y el Ejército del Aire..." },
+            { id: 12, topic: "preliminar", tags: [], question: "La misión de las Fuerzas Armadas es:", options: ["Garantizar la seguridad ciudadana", "Garantizar la soberanía e independencia de España, defender su integridad territorial y el ordenamiento constitucional", "Defender al Rey y al Gobierno", "Mantener la paz internacional"], correctIndex: 1, article: "Art. 8.1 CE", feedback: "...tienen como misión garantizar la soberanía e independencia de España, defender su integridad territorial y el ordenamiento constitucional." },
+            { id: 13, topic: "preliminar", tags: [], question: "Los sindicatos de trabajadores y las asociaciones empresariales contribuyen a:", options: ["La defensa y promoción de los intereses económicos y sociales que les son propios", "La regulación del mercado laboral", "La creación de empleo", "El pluralismo político"], correctIndex: 0, article: "Art. 7 CE", feedback: "...contribuyen a la defensa y promoción de los intereses económicos y sociales que les son propios." },
+            { id: 14, topic: "preliminar", tags: [], question: "¿Están los ciudadanos y poderes públicos sujetos a la Constitución?", options: ["Sólo los poderes públicos", "Sólo los ciudadanos", "Los ciudadanos y los poderes públicos", "Depende de la Ley"], correctIndex: 2, article: "Art. 9.1 CE", feedback: "Los ciudadanos y los poderes públicos están sujetos a la Constitución y al resto del ordenamiento jurídico." },
+            { id: 15, topic: "preliminar", tags: [], question: "La Constitución NO garantiza:", options: ["El principio de legalidad", "La jerarquía normativa", "La retroactividad de las disposiciones sancionadoras no favorables", "La publicidad de las normas"], correctIndex: 2, article: "Art. 9.3 CE", feedback: "La Constitución garantiza... la IRRETROACTIVIDAD de las disposiciones sancionadoras no favorables o restrictivas de derechos individuales." },
+
+            // --- TÍTULO I ---
+            { id: 16, topic: "titulo1", tags: [], question: "La dignidad de la persona, los derechos inviolables que le son inherentes... son fundamento de:", options: ["El orden político y la paz social", "El Estado de Derecho", "La soberanía nacional", "La democracia"], correctIndex: 0, article: "Art. 10.1 CE", feedback: "...son fundamento del orden político y de la paz social." },
+            { id: 17, topic: "titulo1", tags: ["plazos"], question: "¿A partir de qué edad se es mayor de edad en España según la CE?", options: ["A los 16 años", "A los 18 años", "A los 21 años", "A los 18 años para votar, 21 para cargos"], correctIndex: 1, article: "Art. 12 CE", feedback: "Los españoles son mayores de edad a los dieciocho años." },
+            { id: 18, topic: "titulo1", tags: [], question: "¿Se puede privar de la nacionalidad española a un español de origen?", options: ["Sí, por delitos de traición", "Sí, mediante Ley Orgánica", "No, en ningún caso", "No, salvo sentencia penal firme"], correctIndex: 2, article: "Art. 11.2 CE", feedback: "Ningún español de origen podrá ser privado de su nacionalidad." },
+            { id: 19, topic: "titulo1", tags: ["plazos"], question: "¿Cuál es el plazo máximo legal de la detención preventiva?", options: ["24 horas", "48 horas", "72 horas", "5 días"], correctIndex: 2, article: "Art. 17.2 CE", feedback: "...y, en todo caso, en el plazo máximo de 72 horas, el detenido deberá ser puesto en libertad o a disposición de la autoridad judicial." },
+            { id: 20, topic: "titulo1", tags: [], question: "La Constitución garantiza el derecho a la vida y a la integridad física y moral. Queda abolida la pena de muerte, salvo lo que puedan disponer:", options: ["Las leyes penales en caso de terrorismo", "Las leyes penales militares para tiempos de guerra", "Las Leyes Orgánicas para delitos graves", "Los tribunales internacionales"], correctIndex: 1, article: "Art. 15 CE", feedback: "Queda abolida la pena de muerte, salvo lo que puedan disponer las leyes penales militares para tiempos de guerra." },
+            { id: 21, topic: "titulo1", tags: [], question: "El domicilio es inviolable. Ninguna entrada o registro podrá hacerse en él sin consentimiento del titular o resolución judicial, salvo en caso de:", options: ["Fuerza mayor", "Delito grave", "Flagrante delito", "Sospecha fundada"], correctIndex: 2, article: "Art. 18.2 CE", feedback: "...salvo en caso de flagrante delito." },
+            { id: 22, topic: "titulo1", tags: [], question: "Se reconoce el derecho de reunión pacífica y sin armas. El ejercicio de este derecho:", options: ["Necesitará autorización previa siempre", "No necesitará autorización previa", "Necesitará autorización en lugares cerrados", "Solo se permite a partidos políticos"], correctIndex: 1, article: "Art. 21.1 CE", feedback: "El ejercicio de este derecho no necesitará autorización previa." },
+            { id: 23, topic: "titulo1", tags: ["plazos"], question: "Para reuniones en lugares de tránsito público y manifestaciones se dará comunicación previa a la autoridad, que solo podrá prohibirlas cuando existan:", options: ["Razones fundadas de alteración del orden público, con peligro para personas o bienes", "Molestias para el tráfico", "Falta de permisos municipales", "Motivos políticos adversos"], correctIndex: 0, article: "Art. 21.2 CE", feedback: "...sólo podrá prohibirlas cuando existan razones fundadas de alteración del orden público, con peligro para personas o bienes." },
+            { id: 24, topic: "titulo1", tags: [], question: "La educación básica es:", options: ["Obligatoria, gratuita y laica", "Obligatoria y gratuita", "Gratuita pero no obligatoria", "Obligatoria hasta los 18 años"], correctIndex: 1, article: "Art. 27.4 CE", feedback: "La enseñanza básica es obligatoria y gratuita." },
+            { id: 25, topic: "titulo1", tags: [], question: "Se reconoce el derecho a la libertad sindical. Sin embargo, la ley podrá limitar o exceptuar el ejercicio de este derecho a:", options: ["Jueces y Magistrados", "Las Fuerzas o Institutos armados", "Funcionarios de prisiones", "Personal sanitario"], correctIndex: 1, article: "Art. 28.1 CE", feedback: "La ley podrá limitar o exceptuar el ejercicio de este derecho a las Fuerzas o Institutos armados o a los demás Cuerpos sometidos a disciplina militar..." },
+            { id: 26, topic: "titulo1", tags: [], question: "Todos contribuirán al sostenimiento de los gastos públicos de acuerdo con su capacidad económica mediante un sistema tributario justo inspirado en los principios de:", options: ["Igualdad y progresividad que, en ningún caso, tendrá alcance confiscatorio", "Proporcionalidad y equidad", "Solidaridad y progresividad", "Legalidad y suficiencia"], correctIndex: 0, article: "Art. 31.1 CE", feedback: "...inspirado en los principios de igualdad y progresividad que, en ningún caso, tendrá alcance confiscatorio." },
+            { id: 27, topic: "titulo1", tags: [], question: "Se reconoce el derecho a la propiedad privada y a la herencia. La función social de estos derechos delimitará su contenido, de acuerdo con:", options: ["La jurisprudencia", "Las leyes", "La Constitución", "Los Tribunales"], correctIndex: 1, article: "Art. 33.2 CE", feedback: "La función social de estos derechos delimitará su contenido, de acuerdo con las leyes." },
+            { id: 28, topic: "titulo1", tags: [], question: "¿A quién corresponde la defensa de los españoles en el exterior?", options: ["A las Comunidades Autónomas", "A las Fuerzas Armadas", "Al Estado", "Al Rey"], correctIndex: 2, article: "Art. 42 CE", feedback: "El Estado velará especialmente por la salvaguardia de los derechos económicos y sociales de los trabajadores españoles en el extranjero..." },
+            { id: 29, topic: "titulo1", tags: [], question: "La suspensión general de los derechos de libertad y seguridad (Art. 17) puede producirse al declararse el estado de:", options: ["Alarma", "Excepción o sitio", "Guerra", "Emergencia nacional"], correctIndex: 1, article: "Art. 55.1 CE", feedback: "Los derechos reconocidos en los artículos 17, 18, apartados 2 y 3... podrán ser suspendidos cuando se acuerde la declaración del estado de excepción o de sitio." },
+            { id: 30, topic: "titulo1", tags: [], question: "¿Qué derecho NO se puede suspender en ningún estado de emergencia (alarma, excepción o sitio)?", options: ["El derecho a la huelga", "El derecho de reunión", "El derecho a la vida", "La inviolabilidad del domicilio"], correctIndex: 2, article: "Art. 55 CE", feedback: "El derecho a la vida (Art. 15) es absoluto y no figura entre los que pueden suspenderse según el artículo 55.1." },
+
+            // --- TÍTULO II ---
+            { id: 31, topic: "titulo2", tags: [], question: "El Rey es el Jefe del Estado, símbolo de su unidad y:", options: ["Permanencia", "Soberanía", "Poder", "Gobierno"], correctIndex: 0, article: "Art. 56.1 CE", feedback: "El Rey es el Jefe del Estado, símbolo de su unidad y permanencia." },
+            { id: 32, topic: "titulo2", tags: [], question: "La persona del Rey es:", options: ["Soberana e intocable", "Inviolable y no está sujeta a responsabilidad", "Responsable políticamente ante las Cortes", "Sujeta al Tribunal Supremo"], correctIndex: 1, article: "Art. 56.3 CE", feedback: "La persona del Rey es inviolable y no está sujeta a responsabilidad. Sus actos estarán siempre refrendados." },
+            { id: 33, topic: "titulo2", tags: [], question: "La Corona de España es hereditaria en los sucesores de S. M. Don Juan Carlos I de Borbón, legítimo heredero de la dinastía:", options: ["Borgoña", "Trastámara", "Borbón", "Histórica"], correctIndex: 3, article: "Art. 57.1 CE", feedback: "...legítimo heredero de la dinastía histórica." },
+            { id: 34, topic: "titulo2", tags: [], question: "En la sucesión a la Corona se preferirá, en el mismo grado:", options: ["A la mujer sobre el varón", "Al varón sobre la mujer", "Al mayor sobre el menor sin distinción de sexo", "A quien designen las Cortes"], correctIndex: 1, article: "Art. 57.1 CE", feedback: "...en el mismo grado, el varón a la mujer." },
+            { id: 35, topic: "titulo2", tags: [], question: "¿A quién corresponde proveer a la sucesión en la Corona si se extinguen todas las líneas llamadas en Derecho?", options: ["Al Rey", "Al Consejo de Estado", "A las Cortes Generales", "Al pueblo mediante referéndum"], correctIndex: 2, article: "Art. 57.3 CE", feedback: "Extinguidas todas las líneas llamadas en Derecho, las Cortes Generales proveerán a la sucesión en la Corona..." },
+            { id: 36, topic: "titulo2", tags: [], question: "La Reina consorte o el consorte de la Reina no podrán asumir funciones constitucionales, salvo lo dispuesto para:", options: ["La sanción de leyes", "La Regencia", "El mando supremo de las Fuerzas Armadas", "La Presidencia del Gobierno"], correctIndex: 1, article: "Art. 58 CE", feedback: "...salvo lo dispuesto para la Regencia." },
+            { id: 37, topic: "titulo2", tags: [], question: "Si el Rey se inhabilitare para el ejercicio de su authority y la imposibilidad fuere reconocida por las Cortes, entrará a ejercer la Regencia:", options: ["El Presidente del Gobierno", "El Príncipe heredero, si fuere mayor de edad", "El familiar más próximo", "Un Consejo de Regencia"], correctIndex: 1, article: "Art. 59.2 CE", feedback: "...entrará a ejercer inmediatamente la Regencia el Príncipe heredero de la Corona, si fuere mayor de edad." },
+            { id: 38, topic: "titulo2", tags: ["numeros"], question: "Si no hubiere ninguna persona a quien corresponda la Regencia, ésta será nombrada por las Cortes y se compondrá de:", options: ["Una persona", "Tres personas", "Uno, tres o cinco personas", "Cinco personas"], correctIndex: 2, article: "Art. 59.3 CE", feedback: "...se compondrá de una, tres o cinco personas." },
+            { id: 39, topic: "titulo2", tags: [], question: "¿A quién corresponde sancionar y promulgar las leyes?", options: ["Al Presidente del Gobierno", "Al Presidente del Congreso", "Al Rey", "A las Cortes Generales"], correctIndex: 2, article: "Art. 62.a CE", feedback: "Corresponde al Rey: sancionar y promulgar las leyes." },
+            { id: 40, topic: "titulo2", tags: [], question: "¿De quién recibe el Rey una cantidad global para el sostenimiento de su Familia y Casa?", options: ["Del patrimonio nacional", "De los Presupuestos del Estado", "De los impuestos directos", "Del Consejo de Ministros"], correctIndex: 1, article: "Art. 65.1 CE", feedback: "El Rey recibe de los Presupuestos del Estado una cantidad global para el sostenimiento de su Familia y Casa, y distribuye libremente la misma." },
+
+            // --- STREAMING_CHUNK:Añadiendo el resto de preguntas de los Títulos III al X... ---
+            // --- TÍTULO III ---
+            { id: 41, topic: "titulo3", tags: [], question: "Las Cortes Generales representan al pueblo español y están formadas por:", options: ["El Congreso de los Diputados", "El Senado", "El Congreso de los Diputados y el Senado", "El Congreso, el Senado y el Rey"], correctIndex: 2, article: "Art. 66.1 CE", feedback: "Las Cortes Generales... están formadas por el Congreso de los Diputados y el Senado." },
+            { id: 42, topic: "titulo3", tags: ["numeros"], question: "¿De cuántos Diputados se compone el Congreso?", options: ["De 350 exactamente", "De un mínimo de 300 y un máximo de 400", "De un mínimo de 350 y máximo de 400", "De 400 exactamente"], correctIndex: 1, article: "Art. 68.1 CE", feedback: "El Congreso se compone de un mínimo de 300 y un máximo de 400 Diputados." },
+            { id: 43, topic: "titulo3", tags: [], question: "La circunscripción electoral es:", options: ["El municipio", "La Comunidad Autónoma", "La provincia", "El Estado completo"], correctIndex: 2, article: "Art. 68.2 CE", feedback: "La circunscripción electoral es la provincia. Las poblaciones de Ceuta y Melilla estarán representadas cada una de ellas por un Diputado." },
+            { id: 44, topic: "titulo3", tags: ["plazos"], question: "El Congreso es elegido por:", options: ["4 años", "5 años", "6 años", "El tiempo que decida el Rey"], correctIndex: 0, article: "Art. 68.4 CE", feedback: "El Congreso es elegido por cuatro años. El mandato de los Diputados termina cuatro años después de su elección o el día de la disolución de la Cámara." },
+            { id: 45, topic: "titulo3", tags: ["plazos"], question: "Las elecciones tendrán lugar entre los treinta y sesenta días desde la terminación del mandato. El Congreso electo deberá ser convocado dentro de:", options: ["Los 15 días siguientes a la celebración de las elecciones", "Los 25 días siguientes a la celebración de las elecciones", "Los 30 días siguientes", "Dos meses"], correctIndex: 1, article: "Art. 68.6 CE", feedback: "El Congreso electo deberá ser convocado dentro de los veinticinco días siguientes a la celebración de las elecciones." },
+            { id: 46, topic: "titulo3", tags: [], question: "El Senado es la Cámara de representación:", options: ["Territorial", "Poblacional", "Soberana", "Municipal"], correctIndex: 0, article: "Art. 69.1 CE", feedback: "El Senado es la Cámara de representación territorial." },
+            { id: 47, topic: "titulo3", tags: ["numeros"], question: "¿Cuántos Senadores se eligen en cada provincia peninsular?", options: ["Dos", "Tres", "Cuatro", "Depende de la población"], correctIndex: 2, article: "Art. 69.2 CE", feedback: "En cada provincia se elegirán cuatro Senadores..." },
+            { id: 48, topic: "titulo3", tags: [], question: "Los Diputados y Senadores gozarán de inviolabilidad por:", options: ["Todos los delitos cometidos durante su mandato", "Las opiniones manifestadas en el ejercicio de sus funciones", "Cualquier actuación política", "Ninguna de las anteriores"], correctIndex: 1, article: "Art. 71.1 CE", feedback: "Los Diputados y Senadores gozarán de inviolabilidad por las opiniones manifestadas en el ejercicio de sus funciones." },
+            { id: 49, topic: "titulo3", tags: [], question: "Para la detención de un Diputado o Senador se requiere que sea en caso de:", options: ["Flagrante delito", "Orden del Tribunal Supremo", "Autorización de la Cámara respectiva", "Delito de terrorismo"], correctIndex: 0, article: "Art. 71.2 CE", feedback: "Durante el período de su mandato... sólo podrán ser detenidos en caso de flagrante delito." },
+            { id: 50, topic: "titulo3", tags: ["mayorias"], question: "Las leyes orgánicas exigen para su aprobación, modificación o derogación:", options: ["Mayoría simple del Congreso", "Mayoría absoluta del Congreso en una votación final sobre el conjunto", "Mayoría de 3/5 de ambas Cámaras", "Unanimidad"], correctIndex: 1, article: "Art. 81.2 CE", feedback: "...exigirá mayoría absoluta del Congreso, en una votación final sobre el conjunto del proyecto." },
+            { id: 51, topic: "titulo3", tags: ["plazos"], question: "¿Qué plazo tiene el Senado para vetar o enmendar un proyecto de ley ordinaria o de ley orgánica remitido por el Congreso?", options: ["1 mes", "2 meses", "20 días", "3 meses"], correctIndex: 1, article: "Art. 90.2 CE", feedback: "El Senado en el plazo de dos meses, a partir del día de la recepción del texto, puede, mediante mensaje motivado, oponer su veto o introducir enmiendas..." },
+            { id: 52, topic: "titulo3", tags: ["plazos"], question: "Si un proyecto de ley es declarado urgente, el plazo del Senado para vetar o enmendar se reduce a:", options: ["10 días", "15 días", "20 días naturales", "1 mes"], correctIndex: 2, article: "Art. 90.3 CE", feedback: "El plazo de dos meses... se reducirá al de veinte días naturales en los proyectos declarados urgentes..." },
+            { id: 53, topic: "titulo3", tags: ["plazos"], question: "Una vez aprobada una ley por las Cortes Generales, el Rey la sancionará en el plazo de:", options: ["10 días", "15 días", "20 días", "30 días"], correctIndex: 1, article: "Art. 91 CE", feedback: "El Rey sancionará en el plazo de quince días las leyes aprobadas por las Cortes Generales, y las promulgará y ordenará su inmediata publicación." },
+
+            // --- TÍTULO IV ---
+            { id: 54, topic: "titulo4", tags: [], question: "El Gobierno dirige la política interior y exterior, la Administración civil y militar y la defensa del Estado. Ejerce la función ejecutiva y la potestad:", options: ["Legislativa", "Reglamentaria", "Judicial", "Soberana"], correctIndex: 1, article: "Art. 97 CE", feedback: "Ejerce la función ejecutiva y la potestad reglamentaria de acuerdo con la Constitución y las leyes." },
+            { id: 55, topic: "titulo4", tags: [], question: "El Gobierno se compone de:", options: ["El Presidente y los Ministros", "El Presidente, Vicepresidentes en su caso, Ministros y demás miembros que establezca la ley", "El Presidente y el Rey", "Los Secretarios de Estado"], correctIndex: 1, article: "Art. 98.1 CE", feedback: "El Gobierno se compone del Presidente, de los Vicepresidentes, en su caso, de los Ministros y de los demás miembros que establezca la ley." },
+            { id: 56, topic: "titulo4", tags: [], question: "¿A quién corresponde proponer el nombramiento de los Ministros al Rey?", options: ["Al Congreso de los Diputados", "Al Presidente del Gobierno", "A las Cortes Generales", "Al partido más votado"], correctIndex: 1, article: "Art. 100 CE", feedback: "Los demás miembros del Gobierno serán nombrados y separados por el Rey, a propuesta de su Presidente." },
+            { id: 57, topic: "titulo4", tags: [], question: "El Gobierno cesa tras la celebración de elecciones generales, en los casos de pérdida de la confianza parlamentaria previstos en la Constitución, o por:", options: ["Dimisión o fallecimiento de su Presidente", "Decisión del Rey", "Petición del Senado", "Fin del año natural"], correctIndex: 0, article: "Art. 101.1 CE", feedback: "El Gobierno cesa... o por dimisión o fallecimiento de su Presidente." },
+            { id: 58, topic: "titulo4", tags: [], question: "La responsabilidad criminal del Presidente y los demás miembros del Gobierno será exigible, en su caso, ante:", options: ["La Audiencia Nacional", "El Tribunal Constitucional", "La Sala de lo Penal del Tribunal Supremo", "Las Cortes Generales"], correctIndex: 2, article: "Art. 102.1 CE", feedback: "...será exigible, en su caso, ante la Sala de lo Penal del Tribunal Supremo." },
+            { id: 59, topic: "titulo4", tags: [], question: "La Administración Pública sirve con objetividad los intereses generales y actúa de acuerdo con los principios de eficacia, jerarquía, descentralización, desconcentración y:", options: ["Coordinación", "Solidaridad", "Igualdad", "Publicidad"], correctIndex: 0, article: "Art. 103.1 CE", feedback: "...y coordinación, con sometimiento pleno a la ley y al Derecho." },
+            { id: 60, topic: "titulo4", tags: [], question: "¿Quién controla la legalidad de la actuación administrativa y el sometimiento de ésta a los fines que la justifican?", options: ["El Tribunal Constitucional", "El Defensor del Pueblo", "Los Tribunales", "El Consejo de Estado"], correctIndex: 2, article: "Art. 106.1 CE", feedback: "Los Tribunales controlan la potestad reglamentaria y la legalidad de la actuación administrativa..." },
+            { id: 61, topic: "titulo4", tags: [], question: "El supremo órgano consultivo del Gobierno es:", options: ["El Tribunal Supremo", "El Consejo Económico y Social", "El Consejo de Estado", "El Defensor del Pueblo"], correctIndex: 2, article: "Art. 107 CE", feedback: "El Consejo de Estado es el supremo órgano consultivo del Gobierno. Una ley orgánica regulará su composición y competencia." },
+
+            // --- TÍTULO V ---
+            { id: 62, topic: "titulo5", tags: [], question: "El Gobierno responde solidariamente en su gestión política ante:", options: ["El Rey", "El Senado", "El Congreso de los Diputados", "Las Cortes Generales en sesión conjunta"], correctIndex: 2, article: "Art. 108 CE", feedback: "El Gobierno responde solidariamente en su gestión política ante el Congreso de los Diputados." },
+            { id: 63, topic: "titulo5", tags: ["mayorias"], question: "El Presidente del Gobierno, previa deliberación del Consejo de Ministros, puede plantear ante el Congreso la cuestión de confianza. La confianza se entenderá otorgada cuando vote a favor de la misma:", options: ["La mayoría absoluta de los Diputados", "La mayoría simple de los Diputados", "La mayoría de 3/5", "La unanimidad"], correctIndex: 1, article: "Art. 112 CE", feedback: "La confianza se entenderá otorgada cuando vote a favor de la misma la mayoría simple de los Diputados." },
+            { id: 64, topic: "titulo5", tags: ["mayorias"], question: "El Congreso de los Diputados puede exigir la responsabilidad política del Gobierno mediante la adopción por ________ de la moción de censura.", options: ["Mayoría simple", "Mayoría absoluta", "Mayoría de 3/5", "Mayoría de 2/3"], correctIndex: 1, article: "Art. 113.1 CE", feedback: "...mediante la adopción por mayoría absoluta de la moción de censura." },
+            { id: 65, topic: "titulo5", tags: ["numeros"], question: "La moción de censura deberá ser propuesta al menos por:", options: ["Una décima parte de los Diputados", "Una quinta parte de los Diputados", "50 Diputados", "Cualquier grupo parlamentario"], correctIndex: 0, article: "Art. 113.2 CE", feedback: "La moción de censura deberá ser propuesta al menos por la décima parte de los Diputados, y habrá de incluir un candidato a la Presidencia del Gobierno." },
+            { id: 66, topic: "titulo5", tags: ["plazos"], question: "La moción de censura no podrá ser votada hasta que transcurran ______ desde su presentación.", options: ["3 días", "5 días", "10 días", "15 días"], correctIndex: 1, article: "Art. 113.3 CE", feedback: "La moción de censura no podrá ser votada hasta que transcurran cinco días desde su presentación." },
+            { id: 67, topic: "titulo5", tags: [], question: "Si el Congreso adopta una moción de censura, el Gobierno:", options: ["Presentará su dimisión al Rey y el candidato se entenderá investido", "Disolverá las Cortes y convocará elecciones", "Presentará una cuestión de confianza", "Se mantiene en funciones 6 meses"], correctIndex: 0, article: "Art. 114.2 CE", feedback: "Si el Congreso adopta una moción de censura, el Gobierno presentará su dimisión al Rey y el candidato incluido en aquélla se entenderá investido..." },
+            { id: 68, topic: "titulo5", tags: [], question: "El Presidente del Gobierno no podrá proponer la disolución de las Cortes cuando esté en trámite:", options: ["Una ley orgánica", "Los Presupuestos Generales del Estado", "Una moción de censura", "Una reforma constitucional"], correctIndex: 2, article: "Art. 115.2 CE", feedback: "La propuesta de disolución no podrá presentarse cuando esté en trámite una moción de censura." },
+            
+            // --- TÍTULO VI ---
+            { id: 69, topic: "titulo6", tags: [], question: "La justicia emana del pueblo y se administra en nombre de:", options: ["La Constitución", "El Rey", "Las Cortes Generales", "El Consejo General del Poder Judicial"], correctIndex: 1, article: "Art. 117.1 CE", feedback: "La justicia emana del pueblo y se administra en nombre del Rey por Jueces y Magistrados..." },
+            { id: 70, topic: "titulo6", tags: [], question: "Los Jueces y Magistrados son independientes, inamovibles, responsables y sometidos únicamente al imperio de:", options: ["El Gobierno", "El Tribunal Supremo", "La ley", "La Constitución y los reglamentos"], correctIndex: 2, article: "Art. 117.1 CE", feedback: "...sometidos únicamente al imperio de la ley." },
+            { id: 71, topic: "titulo6", tags: [], question: "Es obligado cumplir las sentencias y demás resoluciones firmes de los Jueces y Tribunales, así como prestar la colaboración requerida por éstos en el curso del proceso y en:", options: ["La ejecución de lo resuelto", "La fase de instrucción", "El juicio oral", "Las apelaciones"], correctIndex: 0, article: "Art. 118 CE", feedback: "...y en la ejecución de lo resuelto." },
+            { id: 72, topic: "titulo6", tags: [], question: "Las actuaciones judiciales serán:", options: ["Públicas, con las excepciones que prevean las leyes de procedimiento", "Siempre secretas hasta la sentencia", "Públicas solo en la fase final", "Secretas salvo para los implicados"], correctIndex: 0, article: "Art. 120.1 CE", feedback: "Las actuaciones judiciales serán públicas, con las excepciones que prevean las leyes de procedimiento." },
+            { id: 73, topic: "titulo6", tags: [], question: "El órgano de gobierno del Poder Judicial es:", options: ["El Tribunal Supremo", "El Consejo General del Poder Judicial", "El Ministerio de Justicia", "El Tribunal Constitucional"], correctIndex: 1, article: "Art. 122.2 CE", feedback: "El Consejo General del Poder Judicial es el órgano de gobierno del mismo." },
+            { id: 74, topic: "titulo6", tags: ["numeros", "plazos"], question: "El Consejo General del Poder Judicial estará integrado por el Presidente del Tribunal Supremo, que lo presidirá, y por:", options: ["12 Vocales nombrados por 4 años", "15 Vocales nombrados por 5 años", "20 Vocales nombrados por el Rey por un período de 5 años", "25 Vocales vitalicios"], correctIndex: 2, article: "Art. 122.3 CE", feedback: "...y por veinte Vocales nombrados por el Rey por un periodo de cinco años." },
+            { id: 75, topic: "titulo6", tags: [], question: "¿Cuál es el órgano jurisdiccional superior en todos los órdenes, salvo lo dispuesto en materia de garantías constitucionales?", options: ["La Audiencia Nacional", "El Tribunal Constitucional", "El Tribunal Supremo", "El Tribunal de Cuentas"], correctIndex: 2, article: "Art. 123.1 CE", feedback: "El Tribunal Supremo, con jurisdicción en toda España, es el órgano jurisdiccional superior en todos los órdenes, salvo lo dispuesto en materia de garantías constitucionales." },
+            { id: 76, topic: "titulo6", tags: [], question: "El Presidente del Tribunal Supremo será nombrado por el Rey, a propuesta de:", options: ["El Gobierno", "El Consejo General del Poder Judicial", "Las Cortes Generales", "El Ministerio Fiscal"], correctIndex: 1, article: "Art. 123.2 CE", feedback: "El Presidente del Tribunal Supremo será nombrado por el Rey, a propuesta del Consejo General del Poder Judicial..." },
+            { id: 77, topic: "titulo6", tags: [], question: "¿Quién tiene la misión de promover la acción de la justicia en defensa de la legalidad, de los derechos de los ciudadanos y del interés público?", options: ["El Defensor del Pueblo", "El Ministerio Fiscal", "El Consejo de Estado", "La Policía Judicial"], correctIndex: 1, article: "Art. 124.1 CE", feedback: "El Ministerio Fiscal... tiene por misión promover la acción de la justicia en defensa de la legalidad..." },
+
+            // --- TÍTULO VII ---
+            { id: 78, topic: "titulo7", tags: [], question: "Toda la riqueza del país en sus distintas formas y sea cual fuere su titularidad está subordinada al:", options: ["Interés general", "Estado", "Desarrollo económico", "Ministerio de Hacienda"], correctIndex: 0, article: "Art. 128.1 CE", feedback: "Toda la riqueza del país... está subordinada al interés general." },
+            { id: 79, topic: "titulo7", tags: [], question: "Mediante ley se podrá reservar al sector público recursos o servicios esenciales, especialmente en caso de:", options: ["Crisis económica", "Monopolio", "Guerra", "Petición popular"], correctIndex: 1, article: "Art. 128.2 CE", feedback: "...especialmente en caso de monopolio, y asimismo acordar la intervención de empresas cuando así lo exigiere el interés general." },
+            { id: 80, topic: "titulo7", tags: [], question: "¿A quién corresponde originariamente la potestad para establecer los tributos mediante ley?", options: ["A las Comunidades Autónomas", "Exclusivamente al Estado", "A los Ayuntamientos", "Al Gobierno"], correctIndex: 1, article: "Art. 133.1 CE", feedback: "La potestad originaria para establecer los tributos corresponde exclusivamente al Estado, mediante ley." },
+            { id: 81, topic: "titulo7", tags: [], question: "¿A quién corresponde la elaboración de los Presupuestos Generales del Estado y a quién su examen, enmienda y aprobación?", options: ["Elaboración: Congreso. Aprobación: Senado", "Elaboración: Gobierno. Aprobación: Cortes Generales", "Elaboración: Ministerio de Hacienda. Aprobación: Gobierno", "Elaboración: Rey. Aprobación: Cortes Generales"], correctIndex: 1, article: "Art. 134.1 CE", feedback: "Corresponde al Gobierno la elaboración de los Presupuestos Generales del Estado y a las Cortes Generales, su examen, enmienda y aprobación." },
+            { id: 82, topic: "titulo7", tags: ["plazos"], question: "El Gobierno deberá presentar ante el Congreso de los Diputados los Presupuestos Generales del Estado al menos ______ antes de la expiración de los del año anterior.", options: ["Un mes", "Dos meses", "Tres meses", "Quince días"], correctIndex: 2, article: "Art. 134.3 CE", feedback: "...al menos tres meses antes de la expiración de los del año anterior (es decir, antes del 1 de octubre)." },
+            { id: 83, topic: "titulo7", tags: [], question: "El supremo órgano fiscalizador de las cuentas y de la gestión económica de Estado, así como del sector público es:", options: ["El Tribunal Supremo", "La Agencia Tributaria", "El Tribunal de Cuentas", "El Banco de España"], correctIndex: 2, article: "Art. 136.1 CE", feedback: "El Tribunal de Cuentas es el supremo órgano fiscalizador de las cuentas y de la gestión económica de Estado..." },
+
+            // --- TÍTULO VIII ---
+            { id: 84, topic: "titulo8", tags: [], question: "El Estado se organiza territorialmente en:", options: ["Municipios y provincias", "Provincias y Comunidades Autónomas", "Municipios, en provincias y en las Comunidades Autónomas que se constituyan", "Regiones y nacionalidades"], correctIndex: 2, article: "Art. 137 CE", feedback: "El Estado se organiza territorialmente en municipios, en provincias y en las Comunidades Autónomas que se constituyan." },
+            { id: 85, topic: "titulo8", tags: [], question: "La Constitución garantiza el principio de solidaridad consagrado en el artículo 2 de la Constitución, velando por el establecimiento de un:", options: ["Equilibrio económico, adecuado y justo entre las diversas partes del territorio español", "Fondo de Compensación Interterritorial", "Sistema tributario común", "Gobierno central fuerte"], correctIndex: 0, article: "Art. 138.1 CE", feedback: "...velando por el establecimiento de un equilibrio económico, adecuado y justo entre las diversas partes del territorio español..." },
+            { id: 86, topic: "titulo8", tags: [], question: "El gobierno y administración autónoma de las provincias estarán encomendados a:", options: ["Los Ayuntamientos", "Las Asambleas Legislativas", "Las Diputaciones u otras Corporaciones de carácter representativo", "Los Delegados del Gobierno"], correctIndex: 2, article: "Art. 141.2 CE", feedback: "El gobierno y la administración autónoma de las provincias estarán encomendados a Diputaciones u otras Corporaciones de carácter representativo." },
+            { id: 87, topic: "titulo8", tags: [], question: "Las alteraciones de los límites provinciales habrán de ser aprobadas por las Cortes Generales mediante:", options: ["Ley ordinaria", "Ley orgánica", "Decreto-Ley", "Referéndum"], correctIndex: 1, article: "Art. 141.1 CE", feedback: "Cualquier alteración de los límites provinciales habrá de ser aprobada por las Cortes Generales mediante ley orgánica." },
+            { id: 88, topic: "titulo8", tags: [], question: "La norma institucional básica de cada Comunidad Autónoma es:", options: ["La Constitución", "La Ley Orgánica de Transferencias", "El Estatuto de Autonomía", "El Decreto del Presidente de la CA"], correctIndex: 2, article: "Art. 147.1 CE", feedback: "Dentro de los términos de la presente Constitución, los Estatutos serán la norma institucional básica de cada Comunidad Autónoma..." },
+            { id: 89, topic: "titulo8", tags: [], question: "El control de constitucionalidad de las disposiciones normativas con fuerza de ley de las Comunidades Autónomas corresponde a:", options: ["El Gobierno", "La Jurisdicción Contencioso-Administrativa", "El Tribunal de Cuentas", "El Tribunal Constitucional"], correctIndex: 3, article: "Art. 153.a CE", feedback: "El control de la actividad de los órganos de las Comunidades Autónomas se ejercerá: a) Por el Tribunal Constitucional, el relativo a la constitucionalidad de sus disposiciones normativas con fuerza de ley." },
+
+            // --- TÍTULO IX ---
+            { id: 90, topic: "titulo9", tags: ["numeros"], question: "El Tribunal Constitucional se compone de:", options: ["10 miembros", "12 miembros", "15 miembros", "20 miembros"], correctIndex: 1, article: "Art. 159.1 CE", feedback: "El Tribunal Constitucional se compone de 12 miembros nombrados por el Rey..." },
+            { id: 91, topic: "titulo9", tags: ["numeros", "mayorias"], question: "De los 12 miembros del Tribunal Constitucional, ¿cuántos son propuestos por el Congreso?", options: ["2", "4 por mayoría de tres quintos", "4 por mayoría absoluta", "Ninguno"], correctIndex: 1, article: "Art. 159.1 CE", feedback: "Cuatro a propuesta del Congreso por mayoría de tres quintos de sus miembros..." },
+            { id: 92, topic: "titulo9", tags: ["numeros"], question: "Los miembros del Tribunal Constitucional serán designados por un período de:", options: ["5 años", "9 años", "Vitalicio", "4 años"], correctIndex: 1, article: "Art. 159.3 CE", feedback: "Los miembros del Tribunal Constitucional serán designados por un período de nueve años y se renovarán por terceras partes cada tres." },
+            { id: 93, topic: "titulo9", tags: [], question: "El Tribunal Constitucional es competente para conocer de:", options: ["El recurso de inconstitucionalidad contra leyes, recurso de amparo, y conflictos de competencia", "Solo el recurso de amparo", "Todos los delitos del Gobierno", "Conflictos entre Ayuntamientos"], correctIndex: 0, article: "Art. 161.1 CE", feedback: "El Tribunal Constitucional tiene jurisdicción en todo el territorio español y es competente para conocer: a) Del recurso de inconstitucionalidad... b) Del recurso de amparo... c) De los conflictos de competencia..." },
+            { id: 94, topic: "titulo9", tags: [], question: "¿Están legitimados para interponer el recurso de inconstitucionalidad?", options: ["Cualquier ciudadano", "El Presidente del Gobierno, el Defensor del Pueblo, 50 Diputados, 50 Senadores, órganos colegiados ejecutivos y asambleas de CA", "Solo el Gobierno y el Congreso", "Los Jueces y Tribunales exclusivamente"], correctIndex: 1, article: "Art. 162.1.a CE", feedback: "Están legitimados: a) Para interponer el recurso de inconstitucionalidad, el Presidente del Gobierno, el Defensor del Pueblo, 50 Diputados, 50 Senadores..." },
+
+            // --- TÍTULO X ---
+            { id: 95, topic: "titulo10", tags: ["mayorias"], question: "Los proyectos de reforma constitucional (procedimiento ordinario) deberán ser aprobados por una mayoría de:", options: ["Tres quintos de cada una de las Cámaras", "Dos tercios de cada Cámara", "Mayoría absoluta", "Unanimidad"], correctIndex: 0, article: "Art. 167.1 CE", feedback: "Los proyectos de reforma constitucional deberán ser aprobados por una mayoría de tres quintos de cada una de las Cámaras." },
+            { id: 96, topic: "titulo10", tags: [], question: "Si no hay acuerdo entre las Cámaras para la reforma ordinaria, se intentará obtenerlo mediante la creación de:", options: ["Una Comisión Mixta paritaria de Diputados y Senadores", "Un referéndum inmediato", "La disolución de las Cortes", "Una Comisión del Tribunal Constitucional"], correctIndex: 0, article: "Art. 167.1 CE", feedback: "Si no hubiera acuerdo entre ambas, se intentará obtenerlo mediante la creación de una Comisión de composición paritaria de Diputados y Senadores..." },
+            { id: 97, topic: "titulo10", tags: ["mayorias"], question: "Para la revisión TOTAL de la Constitución o una parcial que afecte al Título Preliminar, Capítulo II, Sección 1ª del Título I, o al Título II, se procederá a la aprobación del principio por mayoría de:", options: ["Tres quintos de cada Cámara", "Dos tercios de cada Cámara", "Mayoría absoluta", "Mayoría simple"], correctIndex: 1, article: "Art. 168.1 CE", feedback: "...se procederá a la aprobación del principio por mayoría de dos tercios de cada Cámara, y a la disolución inmediata de las Cortes." },
+            { id: 98, topic: "titulo10", tags: [], question: "En el procedimiento agravado de reforma (Art. 168), una vez aprobada la reforma por las nuevas Cortes, ¿es obligatorio el referéndum?", options: ["Sí, para su ratificación", "No, solo si lo pide el Presidente", "Solo si lo pide un 10% de los ciudadanos", "No está previsto el referéndum"], correctIndex: 0, article: "Art. 168.3 CE", feedback: "Aprobada la reforma por las Cortes Generales, será sometida a referéndum para su ratificación." },
+            { id: 99, topic: "titulo10", tags: [], question: "No podrá iniciarse la reforma constitucional en tiempo de:", options: ["Guerra o de vigencia de alguno de los estados previstos en el art. 116 (alarma, excepción y sitio)", "Crisis económica grave", "Campaña electoral", "Vacaciones parlamentarias"], correctIndex: 0, article: "Art. 169 CE", feedback: "No podrá iniciarse la reforma constitucional en tiempo de guerra o de vigencia de alguno de los estados previstos en el artículo 116." },
+
+            // --- BLOQUE 2: AMPLIACIÓN MASIVA ---
+            { id: 100, topic: "preliminar", tags: [], question: "¿Cuáles son los valores superiores del ordenamiento jurídico español?", options: ["La libertad, la justicia, la igualdad y el pluralismo político", "La paz, la justicia, la libertad y la solidaridad", "La libertad, la igualdad, la fraternidad y la justicia", "El pluralismo político, la democracia y la monarquía"], correctIndex: 0, article: "Art. 1.1 CE", feedback: "...propugna como valores superiores de su ordenamiento jurídico la libertad, la justicia, la igualdad y el pluralismo político." },
+            { id: 101, topic: "preliminar", tags: [], question: "Los Estatutos podrán reconocer banderas y enseñas propias de las Comunidades Autónomas. Estas se utilizarán:", options: ["Solo en los edificios públicos autonómicos", "Junto a la bandera de España en sus edificios públicos y en sus actos oficiales", "En sustitución de la bandera de España si así lo decide su Parlamento", "Exclusivamente en actos culturales"], correctIndex: 1, article: "Art. 4.2 CE", feedback: "Estas se utilizarán junto a la bandera de España en sus edificios públicos y en sus actos oficiales." },
+            { id: 102, topic: "preliminar", tags: [], question: "La estructura interna y el funcionamiento de los partidos políticos deberán ser:", options: ["Democráticos", "Libres", "Estatales", "Sometidos al Gobierno"], correctIndex: 0, article: "Art. 6 CE", feedback: "Su estructura interna y funcionamiento deberán ser democráticos." },
+            { id: 103, topic: "preliminar", tags: [], question: "La estructura interna y el funcionamiento de los sindicatos y asociaciones empresariales deberán ser:", options: ["Transparentes", "Supervisados por el Estado", "Democráticos", "Autónomos"], correctIndex: 2, article: "Art. 7 CE", feedback: "Su estructura interna y funcionamiento deberán ser democráticos." },
+            { id: 104, topic: "preliminar", tags: [], question: "¿A quién corresponde remover los obstáculos que impidan o dificulten la plenitud de la libertad y la igualdad?", options: ["A los Jueces y Tribunales", "Al Defensor del Pueblo", "A los poderes públicos", "A las Cortes Generales"], correctIndex: 2, article: "Art. 9.2 CE", feedback: "Corresponde a los poderes públicos promover las condiciones... y remover los obstáculos que impidan o dificulten su plenitud." },
+            { id: 105, topic: "preliminar", tags: [], question: "La Constitución garantiza la responsabilidad y la interdicción de la arbitrariedad de:", options: ["Los ciudadanos", "Los poderes públicos", "El Rey", "El Gobierno exclusivamente"], correctIndex: 1, article: "Art. 9.3 CE", feedback: "La Constitución garantiza... la responsabilidad y la interdicción de la arbitrariedad de los poderes públicos." },
+
+            { id: 106, topic: "titulo1", tags: [], question: "Los españoles son iguales ante la ley, sin que pueda prevalecer discriminación alguna por razón de:", options: ["Nacimiento, raza, sexo, religión, opinión o cualquier otra condición o circunstancia personal o social", "Edad, sexo, raza o religión", "Nacionalidad, origen, idioma o religión", "Raza, sexo, idioma o posición económica"], correctIndex: 0, article: "Art. 14 CE", feedback: "...sin que pueda prevalecer discriminación alguna por razón de nacimiento, raza, sexo, religión, opinión o cualquier otra condición o circunstancia personal o social." },
+            { id: 107, topic: "titulo1", tags: [], question: "Nadie podrá ser obligado a declarar sobre:", options: ["Su patrimonio", "Su ideología, religión o creencias", "Su orientación sexual", "Sus antecedentes penales"], correctIndex: 1, article: "Art. 16.2 CE", feedback: "Nadie podrá ser obligado a declarar sobre su ideología, religión o creencias." },
+            { id: 108, topic: "titulo1", tags: [], question: "¿Puede la autoridad administrativa imponer sanciones que directa o subsidiariamente impliquen privación de libertad?", options: ["Sí, en casos de terrorismo", "Sí, si lo autoriza un juez posteriormente", "No, en ningún caso", "No, salvo estado de excepción"], correctIndex: 2, article: "Art. 25.3 CE", feedback: "La Administración civil no podrá imponer sanciones que, directa o subsidiariamente, impliquen privación de libertad." },
+            { id: 109, topic: "titulo1", tags: [], question: "Se reconoce el derecho a la libertad de expresión. El secuestro de publicaciones, grabaciones y otros medios de información sólo podrá acordarse en virtud de:", options: ["Orden del Ministerio del Interior", "Decisión gubernamental", "Resolución judicial", "Petición popular"], correctIndex: 2, article: "Art. 20.5 CE", feedback: "Sólo podrá acordarse el secuestro de publicaciones, grabaciones y otros medios de información en virtud de resolución judicial." },
+            { id: 110, topic: "titulo1", tags: [], question: "Las asociaciones que persigan fines o utilicen medios tipificados como delito son:", options: ["Ilegales", "Inconstitucionales", "Alegales", "Irregulares"], correctIndex: 0, article: "Art. 22.2 CE", feedback: "Las asociaciones que persigan fines o utilicen medios tipificados como delito son ilegales." },
+            { id: 111, topic: "titulo1", tags: [], question: "Las asociaciones constituidas al amparo de este artículo (Art. 22) deberán inscribirse en un registro a los solos efectos de:", options: ["Control gubernamental", "Autorización", "Publicidad", "Fiscalidad"], correctIndex: 2, article: "Art. 22.3 CE", feedback: "Las asociaciones... deberán inscribirse en un registro a los solos efectos de publicidad." },
+            { id: 112, topic: "titulo1", tags: [], question: "Las asociaciones sólo podrán ser disueltas o suspendidas en sus actividades en virtud de:", options: ["Orden del Ministro del Interior", "Resolución judicial motivada", "Decreto del Gobierno", "Ley de las Cortes"], correctIndex: 1, article: "Art. 22.4 CE", feedback: "Las asociaciones sólo podrán ser disueltas o suspendidas en sus actividades en virtud de resolución judicial motivada." },
+            { id: 113, topic: "titulo1", tags: [], question: "Todas las personas tienen derecho a obtener la tutela efectiva de los jueces y tribunales en el ejercicio de sus derechos e intereses legítimos, sin que, en ningún caso, pueda producirse:", options: ["Indefensión", "Demora", "Costas", "Prevaricación"], correctIndex: 0, article: "Art. 24.1 CE", feedback: "...sin que, en ningún caso, pueda producirse indefensión." },
+            { id: 114, topic: "titulo1", tags: [], question: "Las penas privativas de libertad y las medidas de seguridad estarán orientadas hacia:", options: ["El castigo del delincuente", "La reeducación y reinserción social", "La protección de la sociedad", "El aislamiento del penado"], correctIndex: 1, article: "Art. 25.2 CE", feedback: "Las penas privativas de libertad y las medidas de seguridad estarán orientadas hacia la reeducación y reinserción social..." },
+            { id: 115, topic: "titulo1", tags: [], question: "Se prohíben los Tribunales de Honor en el ámbito de:", options: ["La Administración civil y de las organizaciones profesionales", "El Ejército", "Los partidos políticos exclusivamente", "Los sindicatos exclusivamente"], correctIndex: 0, article: "Art. 26 CE", feedback: "Se prohíben los Tribunales de Honor en el ámbito de la Administración civil y de las organizaciones profesionales." },
+            { id: 116, topic: "titulo1", tags: [], question: "Los poderes públicos garantizan el derecho que asiste a los padres para que sus hijos reciban la formación religiosa y moral que esté de acuerdo con:", options: ["La religión oficial del Estado", "El currículo escolar", "Sus propias convicciones", "Los valores constitucionales"], correctIndex: 2, article: "Art. 27.3 CE", feedback: "...que esté de acuerdo con sus propias convicciones." },
+            { id: 117, topic: "titulo1", tags: [], question: "Se reconoce el derecho de los trabajadores y empresarios a adoptar medidas de conflicto colectivo. La ley que regule el ejercicio de este derecho incluirá:", options: ["El arbitraje obligatorio", "Las garantías precisas para asegurar el funcionamiento de los servicios esenciales de la comunidad", "La prohibición del cierre patronal", "Sanciones económicas"], correctIndex: 1, article: "Art. 37.2 CE", feedback: "...incluirá las garantías precisas para asegurar el funcionamiento de los servicios esenciales de la comunidad." },
+            { id: 118, topic: "titulo1", tags: [], question: "El derecho a la protección de la salud se reconoce en el artículo:", options: ["Artículo 15", "Artículo 43", "Artículo 27", "Artículo 50"], correctIndex: 1, article: "Art. 43.1 CE", feedback: "Se reconoce el derecho a la protección de la salud." },
+            { id: 119, topic: "titulo1", tags: [], question: "Los poderes públicos mantendrán un régimen público de Seguridad Social para todos los ciudadanos que garantice asistencia y prestaciones sociales suficientes ante:", options: ["Cualquier situación", "Situaciones de necesidad, especialmente en caso de desempleo", "Accidentes laborales exclusivamente", "La vejez"], correctIndex: 1, article: "Art. 41 CE", feedback: "...ante situaciones de necesidad, especialmente en caso de desempleo. La asistencia y prestaciones complementarias serán libres." },
+            { id: 120, topic: "titulo1", tags: [], question: "¿A quién encomienda la Constitución la defensa de los derechos comprendidos en el Título I, como alto comisionado de las Cortes Generales?", options: ["Al Defensor del Pueblo", "Al Tribunal Constitucional", "Al Ministerio Fiscal", "Al Rey"], correctIndex: 0, article: "Art. 54 CE", feedback: "Una ley orgánica regulará la institución del Defensor del Pueblo, como alto comisionado de las Cortes Generales..." },
+            { id: 121, topic: "titulo1", tags: [], question: "Cualquier ciudadano podrá recabar la tutela de las libertades y derechos reconocidos en el artículo 14 y la Sección 1ª del Capítulo II del Título I ante los Tribunales ordinarios mediante un procedimiento basado en los principios de:", options: ["Publicidad y gratuidad", "Preferencia y sumariedad", "Igualdad y equidad", "Oralidad y rapidez"], correctIndex: 1, article: "Art. 53.2 CE", feedback: "...ante los Tribunales ordinarios por un procedimiento basado en los principios de preferencia y sumariedad..." },
+            
+            { id: 122, topic: "titulo2", tags: [], question: "El Rey, al ser proclamado ante las Cortes Generales, prestará juramento de desempeñar fielmente sus funciones, guardar y hacer guardar la Constitución y las leyes y:", options: ["Respetar los derechos de los ciudadanos y de las CCAA", "Servir a la Nación española", "Proteger el catolicismo", "Acabar con la tiranía"], correctIndex: 0, article: "Art. 61.1 CE", feedback: "...y respetar los derechos de los ciudadanos y de las Comunidades Autónomas." },
+            { id: 123, topic: "titulo2", tags: [], question: "El Príncipe heredero, al alcanzar la mayoría de edad, prestará el mismo juramento que el Rey, así como el de:", options: ["Fidelidad al Rey", "Fidelidad a las Cortes", "Sucesión dinástica", "Mandato militar"], correctIndex: 0, article: "Art. 61.2 CE", feedback: "...así como el de fidelidad al Rey." },
+            { id: 124, topic: "titulo2", tags: [], question: "Corresponde al Rey manifestar el consentimiento del Estado para obligarse internacionalmente por medio de:", options: ["Tratados", "Guerras", "Alianzas", "Contratos"], correctIndex: 0, article: "Art. 63.2 CE", feedback: "Al Rey corresponde manifestar el consentimiento del Estado para obligarse internacionalmente por medio de tratados..." },
+            { id: 125, topic: "titulo2", tags: [], question: "¿A quién corresponde declarar la guerra y hacer la paz?", options: ["Al Presidente del Gobierno", "A las Cortes Generales", "Al Rey, previa autorización de las Cortes Generales", "Al Rey, previa autorización del Consejo de Ministros"], correctIndex: 2, article: "Art. 63.3 CE", feedback: "Al Rey corresponde, previa autorización de las Cortes Generales, declarar la guerra y hacer la paz." },
+            { id: 126, topic: "titulo2", tags: [], question: "De los actos del Rey serán responsables:", options: ["El propio Rey", "Nadie, porque es inviolable", "Las personas que los refrenden", "El Tribunal Supremo"], correctIndex: 2, article: "Art. 64.2 CE", feedback: "De los actos del Rey serán responsables las personas que los refrenden." },
+            { id: 127, topic: "titulo2", tags: [], question: "¿Quién nombra a los miembros civiles y militares de su Casa Real?", options: ["El Gobierno", "El Rey libremente", "Las Cortes", "El Ministro de Defensa"], correctIndex: 1, article: "Art. 65.2 CE", feedback: "El Rey nombra y releva libremente a los miembros civiles y militares de su Casa." },
+            { id: 128, topic: "titulo2", tags: [], question: "El tutor del Rey menor, si no hubiese sido nombrado en testamento y a falta de padre o madre, será nombrado por:", options: ["El Gobierno", "El Consejo de Regencia", "Las Cortes Generales", "El Tribunal Supremo"], correctIndex: 2, article: "Art. 60.1 CE", feedback: "...lo nombrarán las Cortes Generales, pero no podrán acumularse los cargos de Regente y de tutor sino en el padre, madre o ascendientes directos." },
+
+            { id: 129, topic: "titulo3", tags: ["numeros", "mayorias"], question: "Los reglamentos y su reforma serán sometidos a una votación final sobre su totalidad en las Cámaras, que requerirá:", options: ["Mayoría simple", "Mayoría absoluta", "Tres quintos", "Dos tercios"], correctIndex: 1, article: "Art. 72.1 CE", feedback: "Los Reglamentos y su reforma serán sometidos a una votación final sobre su totalidad, que requerirá la mayoría absoluta." },
+            { id: 130, topic: "titulo3", tags: ["plazos", "numeros"], question: "Las Cámaras se reunirán anualmente en dos períodos ordinarios de sesiones. El primero, de septiembre a diciembre, y el segundo de:", options: ["Enero a junio", "Febrero a mayo", "Febrero a junio", "Marzo a julio"], correctIndex: 2, article: "Art. 73.1 CE", feedback: "...el primero, de septiembre a diciembre, y el segundo, de febrero a junio." },
+            { id: 131, topic: "titulo3", tags: [], question: "¿Quién presidirá las sesiones conjuntas de las Cámaras?", options: ["El Rey", "El Presidente del Gobierno", "El Presidente del Senado", "El Presidente del Congreso"], correctIndex: 3, article: "Art. 72.2 CE", feedback: "Las sesiones conjuntas serán presididas por el Presidente del Congreso y se regirán por un Reglamento de las Cortes Generales..." },
+            { id: 132, topic: "titulo3", tags: [], question: "Las Cámaras funcionan en Pleno y en:", options: ["Comisiones Permanentes de Estudio", "Comisiones Legislativas", "Comisiones", "Sindicatos"], correctIndex: 2, article: "Art. 75.1 CE", feedback: "Las Cámaras funcionarán en Pleno y por Comisiones." },
+            { id: 133, topic: "titulo3", tags: [], question: "¿Qué tipo de leyes no pueden ser delegadas a las Comisiones Legislativas Permanentes?", options: ["Leyes ordinarias y presupuestos", "La reforma constitucional, cuestiones internacionales, leyes orgánicas y de bases y PGE", "Solo la reforma constitucional", "Leyes de bases y leyes autonómicas"], correctIndex: 1, article: "Art. 75.3 CE", feedback: "Quedan exceptuados de lo dispuesto en el apartado anterior la reforma constitucional, las cuestiones internacionales, las leyes orgánicas y de bases y los Presupuestos..." },
+            { id: 134, topic: "titulo3", tags: [], question: "¿Pueden las Cortes recibir peticiones ciudadanas?", options: ["Sí, pero sólo por escrito, prohibiéndose la presentación directa por manifestaciones ciudadanas", "Sí, en persona por manifestaciones ciudadanas", "No, para eso está el Defensor del Pueblo", "Sí, a través del Rey"], correctIndex: 0, article: "Art. 77.1 CE", feedback: "Las Cámaras pueden recibir peticiones individual y colectivamente, siempre por escrito, quedando prohibida la presentación directa por manifestaciones ciudadanas." },
+            { id: 135, topic: "titulo3", tags: ["mayorias"], question: "Para adoptar acuerdos, las Cámaras deben estar reunidas reglamentariamente y con asistencia de:", options: ["La mayoría absoluta de sus miembros", "La mayoría de sus miembros", "Dos tercios de sus miembros", "Cualquier número de miembros"], correctIndex: 1, article: "Art. 79.1 CE", feedback: "Para adoptar acuerdos, las Cámaras deben estar reunidas reglamentariamente y con asistencia de la mayoría de sus miembros." },
+            { id: 136, topic: "titulo3", tags: [], question: "Los acuerdos de las Cámaras, para ser válidos, deberán ser aprobados por la mayoría de los miembros presentes, sin perjuicio de:", options: ["El veto del Rey", "Las mayorías especiales que establezcan la Constitución o las leyes orgánicas", "La opinion del Senado", "Lo que diga el Tribunal Constitucional"], correctIndex: 1, article: "Art. 79.2 CE", feedback: "...sin perjuicio de las mayorías especiales que establezcan la Constitución o las leyes orgánicas y las que para elección de personas establezcan los Reglamentos..." },
+            { id: 137, topic: "titulo3", tags: [], question: "¿A quién corresponde la iniciativa legislativa?", options: ["Sólo al Gobierno", "Al Gobierno, al Congreso y al Senado, de acuerdo con la Constitución y los Reglamentos de las Cámaras", "Al Gobierno y al Rey", "Sólo al Congreso"], correctIndex: 1, article: "Art. 87.1 CE", feedback: "La iniciativa legislativa corresponde al Gobierno, al Congreso y al Senado..." },
+            { id: 138, topic: "titulo3", tags: ["numeros"], question: "Para la iniciativa legislativa popular, se exigirán no menos de:", options: ["100.000 firmas acreditadas", "250.000 firmas acreditadas", "500.000 firmas acreditadas", "1.000.000 firmas acreditadas"], correctIndex: 2, article: "Art. 87.3 CE", feedback: "Una ley orgánica regulará las formas de ejercicio y requisitos de la iniciativa popular... En todo caso se exigirán no menos de 500.000 firmas acreditadas." },
+            { id: 139, topic: "titulo3", tags: [], question: "¿Se puede aplicar la iniciativa popular en materias propias de ley orgánica o tributarias?", options: ["Sí, en todas", "No procederá dicha iniciativa en estas materias, ni en carácter internacional ni gracia", "Sólo si lo aprueba el Gobierno", "Sí, pero se necesitan más firmas"], correctIndex: 1, article: "Art. 87.3 CE", feedback: "No procederá dicha iniciativa en materias propias de ley orgánica, tributarias o de carácter internacional, ni en lo relativo a la prerrogativa de gracia." },
+            { id: 140, topic: "titulo3", tags: [], question: "En caso de extraordinaria y urgente necesidad, el Gobierno podrá dictar disposiciones legislativas provisionales que tomarán la forma de:", options: ["Leyes Orgánicas", "Decretos-leyes", "Reales Decretos", "Reglamentos"], correctIndex: 1, article: "Art. 86.1 CE", feedback: "...el Gobierno podrá dictar disposiciones legislativas provisionales que tomarán la forma de Decretos-leyes..." },
+            { id: 141, topic: "titulo3", tags: ["plazos"], question: "Los Decretos-leyes deberán ser sometidos a debate y votación de totalidad al Congreso en el plazo de los:", options: ["15 días siguientes a su promulgación", "20 días siguientes a su promulgación", "30 días siguientes a su promulgación", "2 meses siguientes a su promulgación"], correctIndex: 2, article: "Art. 86.2 CE", feedback: "...deberán ser inmediatamente sometidos a debate y votación de totalidad al Congreso... en el plazo de los treinta días siguientes a su promulgación." },
+            { id: 142, topic: "titulo3", tags: [], question: "¿A quién deben comunicar inmediatamente el Gobierno los tratados o convenios (que no exijan autorización previa de las Cortes)?", options: ["Al Rey", "Al Congreso y al Senado", "Al Tribunal Constitucional", "Al Consejo de Estado"], correctIndex: 1, article: "Art. 94.2 CE", feedback: "El Congreso y el Senado serán inmediatamente informados de la conclusión de los restantes tratados o convenios." },
+
+            { id: 143, topic: "titulo4", tags: ["plazos", "mayorias"], question: "En la investidura del Presidente del Gobierno, si no se alcanza la mayoría absoluta en primera votación, la misma propuesta se someterá a nueva votación pasadas:", options: ["24 horas", "48 horas", "72 horas", "5 días"], correctIndex: 1, article: "Art. 99.3 CE", feedback: "Si el Congreso... no otorgare su confianza... se someterá la misma propuesta a nueva votación cuarenta y ocho horas después de la anterior..." },
+            { id: 144, topic: "titulo4", tags: ["mayorias"], question: "En la segunda votación de investidura, para que la confianza se entienda otorgada se requiere:", options: ["Mayoría absoluta", "Mayoría simple", "Mayoría de 3/5", "Mayoría de 2/3"], correctIndex: 1, article: "Art. 99.3 CE", feedback: "...y la confianza se entenderá otorgada si obtuviere la mayoría simple." },
+            { id: 145, topic: "titulo4", tags: ["plazos"], question: "Si transcurrido un plazo desde la primera votación de investidura, ningún candidato ha obtenido la confianza, el Rey disolverá ambas Cámaras. ¿De cuánto es este plazo?", options: ["Un mes", "Dos meses", "Tres meses", "Seis meses"], correctIndex: 1, article: "Art. 99.5 CE", feedback: "Si transcurrido el plazo de dos meses, a partir de la primera votación de investidura, ningún candidato hubiere obtenido la confianza del Congreso, el Rey disolverá ambas Cámaras..." },
+            { id: 146, topic: "titulo4", tags: [], question: "Los miembros del Gobierno no podrán ejercer otras funciones representativas que:", options: ["Las propias del mandato parlamentario", "Las de alcalde", "Las de presidente autonómico", "Ninguna otra función"], correctIndex: 0, article: "Art. 98.3 CE", feedback: "Los miembros del Gobierno no podrán ejercer otras funciones representativas que las propias del mandato parlamentario..." },
+            { id: 147, topic: "titulo4", tags: ["mayorias"], question: "Si la acusación contra un miembro del Gobierno fuere por traición o por cualquier delito contra la seguridad del Estado, sólo podrá ser planteada por iniciativa de:", options: ["Un cuarto de los miembros del Congreso, y aprobada por mayoría absoluta del mismo", "Un décimo de los miembros del Congreso", "El Rey", "El Tribunal Supremo"], correctIndex: 0, article: "Art. 102.2 CE", feedback: "...sólo podrá ser planteada por iniciativa de la cuarta parte de los miembros del Congreso, y con la aprobación de la mayoría absoluta del mismo." },
+            { id: 148, topic: "titulo4", tags: [], question: "¿Se puede aplicar la prerrogativa de gracia (indulto) en el caso de responsabilidad criminal del Presidente y los Ministros?", options: ["Sí, como a cualquier ciudadano", "No, no será aplicable la prerrogativa de gracia", "Sólo si lo aprueba el Rey", "Sólo indultos parciales"], correctIndex: 1, article: "Art. 102.3 CE", feedback: "La prerrogativa de gracia no será aplicable a ninguno de los supuestos del presente artículo." },
+            { id: 149, topic: "titulo4", tags: [], question: "La ley regulará el acceso a la función pública de acuerdo con los principios de:", options: ["Mérito y capacidad", "Igualdad y mérito", "Antigüedad y capacidad", "Objetividad y transparencia"], correctIndex: 0, article: "Art. 103.3 CE", feedback: "La ley regulará el estatuto de los funcionarios públicos, el acceso a la función pública de acuerdo con los principios de mérito y capacidad..." },
+            { id: 150, topic: "titulo4", tags: [], question: "Las Fuerzas y Cuerpos de Seguridad, bajo la dependencia del Gobierno, tendrán como misión:", options: ["Proteger el libre ejercicio de los derechos y libertades y garantizar la seguridad ciudadana", "Garantizar la soberanía de España", "Sostener al Gobierno en el poder", "Administrar justicia"], correctIndex: 0, article: "Art. 104.1 CE", feedback: "Las Fuerzas y Cuerpos de seguridad... tendrán como misión proteger el libre ejercicio de los derechos y libertades y garantizar la seguridad ciudadana." },
+            { id: 151, topic: "titulo4", tags: [], question: "El Consejo de Estado es:", options: ["El supremo órgano judicial", "El supremo órgano consultivo del Gobierno", "El órgano de gobierno de los Jueces", "Un ministerio del Gobierno"], correctIndex: 1, article: "Art. 107 CE", feedback: "El Consejo de Estado es el supremo órgano consultivo del Gobierno." },
+
+            { id: 152, topic: "titulo5", tags: [], question: "Las Cámaras y sus Comisiones podrán recabar la información y ayuda que precisen de:", options: ["Únicamente del Gobierno", "El Gobierno y de sus Departamentos y de cualesquiera autoridades del Estado y de las CCAA", "Sólo de las autoridades judiciales", "La Corona"], correctIndex: 1, article: "Art. 109 CE", feedback: "...de cualesquiera autoridades del Estado y de las Comunidades Autónomas." },
+            { id: 153, topic: "titulo5", tags: [], question: "Están obligados a comparecer a requerimiento de las Cámaras:", options: ["Sólo los miembros del Gobierno", "Sólo los funcionarios", "Cualquier persona que no sea aforada", "Los miembros del Gobierno (y los funcionarios y autoridades)"], correctIndex: 3, article: "Art. 110.1 y 110.2 CE", feedback: "Las Cámaras y sus Comisiones pueden reclamar la presencia de los miembros del Gobierno." },
+            { id: 154, topic: "titulo5", tags: [], question: "Toda interpelación al Gobierno en las Cámaras podrá dar lugar a:", options: ["Una moción en la que la Cámara manifieste su posición", "El cese automático del Ministro", "Una disolución anticipada", "Una ley orgánica"], correctIndex: 0, article: "Art. 111.2 CE", feedback: "Toda interpelación podrá dar lugar a una moción en la que la Cámara manifieste su posición." },
+            { id: 155, topic: "titulo5", tags: [], question: "El Gobierno dimisionario continuará en funciones hasta:", options: ["Que pasen 6 meses", "Que se convoquen elecciones", "La toma de posesión del nuevo Gobierno", "Que el Rey nombre un sustituto provisional"], correctIndex: 2, article: "Art. 114.1 CE", feedback: "El Gobierno dimisionario continuará en sus funciones hasta la toma de posesión del nuevo Gobierno." },
+            { id: 156, topic: "titulo5", tags: ["plazos"], question: "El estado de alarma será declarado por el Gobierno mediante decreto acordado en Consejo de Ministros por un plazo máximo de:", options: ["Quince días", "Treinta días", "Dos meses", "Seis meses"], correctIndex: 0, article: "Art. 116.2 CE", feedback: "El estado de alarma será declarado por el Gobierno... por un plazo máximo de quince días, dando cuenta al Congreso..." },
+            { id: 157, topic: "titulo5", tags: [], question: "Para la prórroga del estado de alarma, ¿qué se necesita?", options: ["Autorización del Senado", "Autorización del Congreso de los Diputados", "Aprobación del Rey", "Decisión unilateral del Gobierno"], correctIndex: 1, article: "Art. 116.2 CE", feedback: "...el cual deberá reunirse inmediatamente al efecto y sin cuya autorización no podrá ser prorrogado dicho plazo." },
+            { id: 158, topic: "titulo5", tags: ["plazos"], question: "El estado de excepción será declarado por el Gobierno, previa autorización del Congreso de los Diputados. El plazo de duración no podrá exceder de:", options: ["Quince días", "Treinta días", "Dos meses", "Seis meses"], correctIndex: 1, article: "Art. 116.3 CE", feedback: "El plazo no podrá exceder de treinta días, prorrogable por otro plazo igual, con los mismos requisitos." },
+            { id: 159, topic: "titulo5", tags: ["mayorias"], question: "El estado de sitio será declarado por:", options: ["El Gobierno", "La mayoría absoluta del Congreso de los Diputados, a propuesta exclusiva del Gobierno", "El Senado por mayoría de 3/5", "Las Cortes Generales en sesión conjunta"], correctIndex: 1, article: "Art. 116.4 CE", feedback: "El estado de sitio será declarado por la mayoría absoluta del Congreso de los Diputados, a propuesta exclusiva del Gobierno." },
+            { id: 160, topic: "titulo5", tags: [], question: "Disuelto el Congreso o expirado su mandato, si se produjere alguna de las situaciones que dan lugar a los estados de alarma, excepción y sitio, las competencias del Congreso serán asumidas por:", options: ["El Gobierno", "El Senado", "La Diputación Permanente", "El Rey"], correctIndex: 2, article: "Art. 116.5 CE", feedback: "...las competencias del Congreso serán asumidas por su Diputación Permanente." },
+
+            { id: 161, topic: "titulo6", tags: [], question: "La justicia será gratuita cuando así lo disponga la ley, y, en todo caso:", options: ["Para los pensionistas", "Para los menores de edad", "Respecto de quienes acrediten insuficiencia de recursos para litigar", "En asuntos laborales"], correctIndex: 2, article: "Art. 119 CE", feedback: "La justicia será gratuita... en todo caso, respecto de quienes acrediten insuficiencia de recursos para litigar." },
+            { id: 162, topic: "titulo6", tags: [], question: "Las sentencias serán siempre motivadas y se pronunciarán en:", options: ["Privado", "Audiencia pública", "El BOE", "Presencia del Rey"], correctIndex: 1, article: "Art. 120.3 CE", feedback: "Las sentencias serán siempre motivadas y se pronunciarán en audiencia pública." },
+            { id: 163, topic: "titulo6", tags: [], question: "Los daños causados por error judicial, así como los que sean consecuencia del funcionamiento anormal de la Administración de Justicia darán derecho a:", options: ["Una indemnización a cargo del Estado", "El cese del Juez", "Un nuevo juicio gratuito", "Ninguna compensación"], correctIndex: 0, article: "Art. 121 CE", feedback: "...darán derecho a una indemnización a cargo del Estado, conforme a la ley." },
+            { id: 164, topic: "titulo6", tags: ["numeros"], question: "El mandato de los Vocales del Consejo General del Poder Judicial dura:", options: ["3 años", "4 años", "5 años", "Son vitalicios"], correctIndex: 2, article: "Art. 122.3 CE", feedback: "...veinte Vocales nombrados por el Rey por un período de cinco años." },
+            { id: 165, topic: "titulo6", tags: ["numeros", "mayorias"], question: "De los 20 Vocales del CGPJ, ¿cuántos nombra el Congreso y cuántos el Senado elegidos entre abogados y otros juristas de reconocida competencia con más de 15 años de ejercicio?", options: ["4 el Congreso y 4 el Senado por mayoría de 3/5", "6 el Congreso y 6 el Senado", "10 el Congreso y 10 el Senado", "2 el Congreso y 2 el Senado"], correctIndex: 0, article: "Art. 122.3 CE", feedback: "...doce entre Jueces y Magistrados...; cuatro a propuesta del Congreso de los Diputados, y cuatro a propuesta del Senado, elegidos en ambos casos por mayoría de tres quintos..." },
+            { id: 166, topic: "titulo6", tags: [], question: "El Fiscal General del Estado será nombrado por el Rey, a propuesta de:", options: ["El Congreso", "El CGPJ", "El Gobierno, oído el Consejo General del Poder Judicial", "El Ministerio de Justicia"], correctIndex: 2, article: "Art. 124.4 CE", feedback: "El Fiscal General del Estado será nombrado por el Rey, a propuesta del Gobierno, oído el Consejo General del Poder Judicial." },
+            { id: 167, topic: "titulo6", tags: [], question: "Los ciudadanos podrán ejercer la acción popular y participar en la Administración de Justicia mediante la institución de:", options: ["El Jurado", "El Defensor del Pueblo", "El arbitraje", "Los Jueces de Paz"], correctIndex: 0, article: "Art. 125 CE", feedback: "Los ciudadanos podrán ejercer la acción popular y participar en la Administración de Justicia mediante la institución del Jurado..." },
+            { id: 168, topic: "titulo6", tags: [], question: "La Policía Judicial depende de los Jueces, de los Tribunales y del Ministerio Fiscal en sus funciones de:", options: ["Mantenimiento del orden público", "Averiguación del delito y descubrimiento y aseguramiento del delincuente", "Control de fronteras", "Tráfico"], correctIndex: 1, article: "Art. 126 CE", feedback: "La policía judicial depende de los Jueces, de los Tribunales y del Ministerio Fiscal en sus funciones de averiguación del delito y descubrimiento y aseguramiento del delincuente..." },
+
+            { id: 169, topic: "titulo7", tags: [], question: "La ley establecerá las formas de participación de los interesados en la Seguridad Social y en la actividad de:", options: ["Los partidos políticos", "Los organismos públicos cuya función afecte directamente a la calidad de la vida o al bienestar general", "El Gobierno", "Las Cortes"], correctIndex: 1, article: "Art. 129.1 CE", feedback: "...en la actividad de los organismos públicos cuya función afecte directamente a la calidad de la vida o al bienestar general." },
+            { id: 170, topic: "titulo7", tags: [], question: "Los poderes públicos promoverán eficazmente las diversas formas de participación en la empresa y fomentarán, mediante una legislación adecuada, las sociedades:", options: ["Anónimas", "Limitadas", "Cooperativas", "De capital riesgo"], correctIndex: 2, article: "Art. 129.2 CE", feedback: "...fomentarán, mediante una legislación adecuada, las sociedades cooperativas. También establecerán los medios que faciliten el acceso de los trabajadores a la propiedad de los medios de producción." },
+            { id: 171, topic: "titulo7", tags: [], question: "Los poderes públicos atenderán a la modernización y desarrollo de todos los sectores económicos y, en particular, de la agricultura, de la ganadería, de la pesca y de:", options: ["La industria turística", "La automoción", "La artesanía", "El transporte"], correctIndex: 2, article: "Art. 130.1 CE", feedback: "...y, en particular, de la agricultura, de la ganadería, de la pesca y de la artesanía, a fin de equiparar el nivel de vida de todos los españoles." },
+            { id: 172, topic: "titulo7", tags: [], question: "La ley regulará los bienes de dominio público y los comunales, inspirándose en los principios de:", options: ["Inalienabilidad, imprescriptibilidad e inembargabilidad", "Eficacia, economía y rentabilidad", "Uso privativo y concesión", "Venta en subasta pública"], correctIndex: 0, article: "Art. 132.1 CE", feedback: "...inspirándose en los principios de inalienabilidad, imprescriptibilidad e inembargabilidad, así como su desafectación." },
+            { id: 173, topic: "titulo7", tags: [], question: "Son bienes de dominio público estatal, en todo caso:", options: ["Los montes de utilidad pública", "Los ríos y lagos", "La zona marítimo-terrestre, las playas, el mar territorial y los recursos naturales de la zona económica y la plataforma continental", "Los parques nacionales"], correctIndex: 2, article: "Art. 132.2 CE", feedback: "Son bienes de dominio público estatal los que determine la ley y, en todo caso, la zona marítimo-terrestre, las playas, el mar territorial..." },
+            { id: 174, topic: "titulo7", tags: [], question: "¿Tienen las Comunidades Autónomas y las Corporaciones locales capacidad para establecer tributos?", options: ["No, solo el Estado", "Sí, pero deben hacerlo mediante la delegación expresa del Estado", "Podrán establecer y exigir tributos, de acuerdo con la Constitución y las leyes", "Solo las CCAA, no los entes locales"], correctIndex: 2, article: "Art. 133.2 CE", feedback: "Las Comunidades Autónomas y las Corporaciones locales podrán establecer y exigir tributos, de acuerdo con la Constitución y las leyes." },
+            { id: 175, topic: "titulo7", tags: [], question: "¿Qué ocurre si la Ley de Presupuestos no se aprobara antes del primer día del ejercicio económico correspondiente?", options: ["Se convocan elecciones", "Se suspenden los pagos del Estado", "Se considerarán automáticamente prorrogados los Presupuestos del ejercicio anterior", "El Rey aprueba unos presupuestos de urgencia"], correctIndex: 2, article: "Art. 134.4 CE", feedback: "Si la Ley de Presupuestos no se aprobara antes del primer día del ejercicio económico correspondiente, se considerarán automáticamente prorrogados los Presupuestos del ejercicio anterior hasta la aprobación de los nuevos." },
+            { id: 176, topic: "titulo7", tags: [], question: "¿Puede crearse un tributo por Ley de Presupuestos?", options: ["No, nunca", "Sí, si la Ley lo dice explícitamente", "No podrá crear tributos. Podrá modificarlos cuando una ley tributaria sustantiva así lo prevea", "Sí, es el único método"], correctIndex: 2, article: "Art. 134.7 CE", feedback: "La Ley de Presupuestos no podrá crear tributos. Podrá modificarlos cuando una ley tributaria sustantiva así lo prevea." },
+            { id: 177, topic: "titulo7", tags: [], question: "Todas las Administraciones Públicas adecuarán sus actuaciones al principio de estabilidad presupuestaria. El Estado y las Comunidades Autónomas no podrán incurrir en un déficit estructural que:", options: ["Supere el 3% del PIB", "Supere el de la Unión Europea", "Supere los márgenes establecidos, en su caso, por la Unión Europea para sus Estados Miembros", "Aumente la deuda pública"], correctIndex: 2, article: "Art. 135.2 CE", feedback: "El Estado y las Comunidades Autónomas no podrán incurrir en un déficit estructural que supere los márgenes establecidos, en su caso, por la Unión Europea..." },
+            { id: 178, topic: "titulo7", tags: [], question: "Los créditos para satisfacer los intereses y el capital de la deuda pública de las Administraciones se entenderán siempre:", options: ["Incluidos en el estado de gastos de sus presupuestos y su pago gozará de prioridad absoluta", "Secundarios al gasto social", "Limitados por el Parlamento", "Negociables con los acreedores"], correctIndex: 0, article: "Art. 135.3 CE", feedback: "...se entenderán siempre incluidos en el estado de gastos de sus presupuestos y su pago gozará de prioridad absoluta." },
+
+            { id: 179, topic: "titulo8", tags: [], question: "¿Disfrutan todas las entidades en las que se organiza el Estado territorialmente (municipios, provincias, CCAA) de autonomía?", options: ["Solo las CCAA", "Todas estas entidades gozan de autonomía para la gestión de sus respectivos intereses", "Solo los municipios y CCAA, las provincias no", "No se indica en la CE"], correctIndex: 1, article: "Art. 137 CE", feedback: "Todas estas entidades gozan de autonomía para la gestión de sus respectivos intereses." },
+            { id: 180, topic: "titulo8", tags: [], question: "¿Puede admitirse la federación de Comunidades Autónomas?", options: ["Sí, mediante Ley Orgánica", "En ningún caso se admitirá la federación de Comunidades Autónomas", "Sí, si lo aprueban en referéndum", "Solo para las nacionalidades históricas"], correctIndex: 1, article: "Art. 145.1 CE", feedback: "En ningún caso se admitirá la federación de Comunidades Autónomas." },
+            { id: 181, topic: "titulo8", tags: [], question: "Los Municipios gozan de personalidad jurídica plena. Su gobierno y administración corresponde a:", options: ["Las Diputaciones", "Sus respectivos Ayuntamientos, integrados por los Alcaldes y los Concejales", "El Gobierno de la Comunidad Autónoma", "Los Gobernadores Civiles"], correctIndex: 1, article: "Art. 140 CE", feedback: "Su gobierno y administración corresponde a sus respectivos Ayuntamientos, integrados por los Alcaldes y los Concejales." },
+            { id: 182, topic: "titulo8", tags: [], question: "¿Quién elige a los Concejales de los Ayuntamientos?", options: ["El Alcalde", "Los vecinos del municipio mediante sufragio universal, igual, libre, directo y secreto", "Las Asambleas Autonómicas", "El Ministro del Interior"], correctIndex: 1, article: "Art. 140 CE", feedback: "Los Concejales serán elegidos por los vecinos del municipio mediante sufragio universal, igual, libre, directo y secreto..." },
+            { id: 183, topic: "titulo8", tags: [], question: "Para que las provincias limítrofes, territorios insulares y provincias con entidad regional histórica puedan acceder a su autogobierno (vía ordinaria del 143), la iniciativa corresponde a las Diputaciones/Órganos insulares y a:", options: ["La mayoría de los ciudadanos", "Las dos terceras partes de los municipios cuya población represente al menos la mayoría del censo", "El Gobierno central", "La mitad de los municipios"], correctIndex: 1, article: "Art. 143.2 CE", feedback: "La iniciativa corresponde a todas las Diputaciones... y a las dos terceras partes de los municipios cuya población represente, al menos, la mayoría del censo electoral..." },
+            { id: 184, topic: "titulo8", tags: ["plazos"], question: "Los requisitos para la iniciativa autonómica del art. 143 deberán ser cumplidos en el plazo de ______ desde el primer acuerdo adoptado al respecto por alguna de las Corporaciones locales interesadas.", options: ["3 meses", "6 meses", "1 año", "2 años"], correctIndex: 1, article: "Art. 143.2 CE", feedback: "Estos requisitos deberán ser cumplidos en el plazo de seis meses desde el primer acuerdo adoptado al respecto..." },
+            { id: 185, topic: "titulo8", tags: ["plazos"], question: "Si la iniciativa autonómica no prosperase, solamente podrá reiterarse pasados ______.", options: ["1 año", "2 años", "4 años", "5 años"], correctIndex: 3, article: "Art. 143.3 CE", feedback: "Si esta iniciativa no prosperase, solamente podrá reiterarse pasados cinco años." },
+            { id: 186, topic: "titulo8", tags: [], question: "¿Qué materias no están incluidas en las exclusivas del Estado (art. 149)?", options: ["Nacionalidad, inmigración y extranjería", "Defensa y Fuerzas Armadas", "Relaciones Internacionales", "Asistencia social"], correctIndex: 3, article: "Art. 148.1.20ª CE", feedback: "La asistencia social es una materia que pueden asumir las CCAA según el art. 148.1.20ª. Las otras son exclusivas del Estado según el art. 149.1." },
+            { id: 187, topic: "titulo8", tags: [], question: "Las materias no atribuidas expresamente al Estado por la Constitución podrán corresponder a las CCAA, en virtud de sus respectivos Estatutos. La competencia sobre las materias que no se hayan asumido por los Estatutos de Autonomía corresponderá a:", options: ["Las Diputaciones", "Los Municipios", "El Estado", "Europa"], correctIndex: 2, article: "Art. 149.3 CE", feedback: "...la competencia sobre las materias que no se hayan asumido por los Estatutos de Autonomía corresponderá al Estado..." },
+            { id: 188, topic: "titulo8", tags: [], question: "En caso de conflicto, las normas del Estado prevalecerán sobre las de las CCAA en todo lo que no esté atribuido a la exclusiva competencia de éstas. Además, el derecho estatal será, en todo caso:", options: ["Exclusivo", "Superior", "Supletorio del derecho de las Comunidades Autónomas", "Derogatorio"], correctIndex: 2, article: "Art. 149.3 CE", feedback: "...el derecho estatal será, en todo caso, supletorio del derecho de las Comunidades Autónomas." },
+            { id: 189, topic: "titulo8", tags: ["mayorias"], question: "Si una Comunidad Autónoma no cumpliere las obligaciones constitucionales o legales, o actuare atentando gravemente al interés general, el Gobierno podrá adoptar las medidas necesarias (Art. 155). Para ello necesita la aprobación por:", options: ["Mayoría absoluta del Congreso", "Mayoría absoluta del Senado", "Tres quintos del Senado", "Dos tercios de las Cortes Generales"], correctIndex: 1, article: "Art. 155.1 CE", feedback: "...con la aprobación por mayoría absoluta del Senado, podrá adoptar las medidas necesarias para obligar a aquélla al cumplimiento forzoso..." },
+
+            { id: 190, topic: "titulo9", tags: ["numeros", "mayorias"], question: "De los 12 miembros del Tribunal Constitucional, ¿cuántos son propuestos por el Gobierno y por el CGPJ?", options: ["2 por el Gobierno, 2 por el CGPJ", "4 por el Gobierno, 0 por el CGPJ", "1 por el Gobierno, 3 por el CGPJ", "3 por el Gobierno, 1 por el CGPJ"], correctIndex: 0, article: "Art. 159.1 CE", feedback: "...dos a propuesta del Gobierno, y dos a propuesta del Consejo General del Poder Judicial." },
+            { id: 191, topic: "titulo9", tags: ["plazos"], question: "El Presidente del Tribunal Constitucional será nombrado por el Rey, a propuesta del mismo Tribunal en pleno, por un período de:", options: ["3 años", "5 años", "9 años", "Vitalicio"], correctIndex: 0, article: "Art. 160 CE", feedback: "El Presidente del Tribunal Constitucional será nombrado... por un período de tres años." },
+            { id: 192, topic: "titulo9", tags: [], question: "Para ser miembro del Tribunal Constitucional se debe reunir la condición de Magistrado, Fiscal, Profesor de Universidad, Funcionario o Abogado, con más de:", options: ["10 años de ejercicio profesional", "15 años de ejercicio profesional", "20 años de ejercicio profesional", "No hay un mínimo, solo reconocida competencia"], correctIndex: 1, article: "Art. 159.2 CE", feedback: "...todos ellos juristas de reconocida competencia con más de quince años de ejercicio profesional." },
+            { id: 193, topic: "titulo9", tags: [], question: "La condición de miembro del Tribunal Constitucional es incompatible con:", options: ["Todo mandato representativo y cargos directivos en un partido político", "El ejercicio de la carrera judicial o fiscal", "El desempeño de cualquier actividad profesional o mercantil", "Todas las opciones anteriores son correctas"], correctIndex: 3, article: "Art. 159.4 CE", feedback: "Es incompatible con todo mandato representativo, cargos políticos o directivos en partidos, carrera judicial, y cualquier otra actividad." },
+            { id: 194, topic: "titulo9", tags: [], question: "¿Quién está legitimado para interponer el recurso de amparo ante el TC?", options: ["Solo el Defensor del Pueblo", "Solo el Ministerio Fiscal", "Toda persona natural o jurídica que invoque un interés legítimo, así como el Defensor del Pueblo y el Ministerio Fiscal", "El Presidente del Gobierno en exclusiva"], correctIndex: 2, article: "Art. 162.1.b CE", feedback: "Para interponer el recurso de amparo, toda persona natural o jurídica que invoque un interés legítimo, así como el Defensor del Pueblo y el Ministerio Fiscal." },
+            { id: 195, topic: "titulo9", tags: [], question: "Cuando un órgano judicial considere, en algún proceso, que una norma con fuerza de ley aplicable al caso y de cuya validez dependa el fallo pueda ser contraria a la CE, planteará:", options: ["Un recurso de inconstitucionalidad", "Un recurso de amparo", "La cuestión de inconstitucionalidad", "Un conflicto de competencias"], correctIndex: 2, article: "Art. 163 CE", feedback: "...planteará la cuestión ante el Tribunal Constitucional en los supuestos, en la forma y con los efectos que establezca la ley." },
+            { id: 196, topic: "titulo9", tags: [], question: "Las sentencias del Tribunal Constitucional se publicarán en el boletín oficial del Estado con:", options: ["Los votos particulares, si los hubiere", "Un resumen", "Solo el fallo", "Un comentario del Gobierno"], correctIndex: 0, article: "Art. 164.1 CE", feedback: "Las sentencias del Tribunal Constitucional se publicarán en el boletín oficial del Estado con los votos particulares, si los hubiere." },
+
+            { id: 197, topic: "titulo10", tags: [], question: "¿A quién corresponde la iniciativa de la reforma constitucional según el Art. 166?", options: ["Sólo al Gobierno", "Al Gobierno, Congreso y Senado de forma exclusiva", "A los mismos órganos que tienen la iniciativa legislativa según los apartados 1 y 2 del art. 87 (Gobierno, Congreso, Senado y Asambleas de CCAA)", "A los ciudadanos por iniciativa popular"], correctIndex: 2, article: "Art. 166 CE", feedback: "La iniciativa de reforma constitucional se ejercerá en los términos previstos en los apartados 1 y 2 del artículo 87." },
+            { id: 198, topic: "titulo10", tags: [], question: "¿Permite la Constitución la iniciativa popular para reformar la propia Constitución?", options: ["Sí, con 1 millón de firmas", "Sí, con 500.000 firmas", "No, el Art. 166 omite el apartado 3 del art. 87 que permite la iniciativa popular", "Solo para reformas del Título Preliminar"], correctIndex: 2, article: "Art. 166 CE", feedback: "La Constitución no admite iniciativa popular para su reforma (el art. 166 cita el art 87 ap. 1 y 2, dejando fuera el 3 de iniciativa popular)." },
+            { id: 199, topic: "titulo10", tags: ["mayorias"], question: "En el procedimiento ordinario de reforma constitucional (Art. 167), si el texto de la Comisión Mixta no logra la aprobación de ambas Cámaras, ¿puede el Congreso aprobarla de otra forma?", options: ["No, el texto decae", "Sí, si el texto obtiene mayoría absoluta en el Senado y 3/5 en el Congreso", "Sí, siempre que el texto hubiere obtenido el voto favorable de la mayoría absoluta del Senado, el Congreso podrá aprobar la reforma por mayoría de 2/3", "Sí, sometiéndolo a referéndum directamente"], correctIndex: 2, article: "Art. 167.2 CE", feedback: "De no lograrse la aprobación... siempre que el texto hubiere obtenido el voto favorable de la mayoría absoluta del Senado, el Congreso, por mayoría de dos tercios, podrá aprobar la reforma." },
+            { id: 200, topic: "titulo10", tags: ["numeros", "plazos"], question: "Aprobada la reforma por las Cortes Generales (procedimiento ordinario del 167), será sometida a referéndum para su ratificación cuando así lo soliciten, dentro de los quince días siguientes a su aprobación:", options: ["Una décima parte de los miembros de cualquiera de las Cámaras", "Un tercio de los miembros del Congreso", "Cincuenta Diputados o Senadores", "La mitad del Senado"], correctIndex: 0, article: "Art. 167.3 CE", feedback: "...cuando así lo soliciten, dentro de los quince días siguientes a su aprobación, una décima parte de los miembros de cualquiera de las Cámaras." },
+            { id: 201, topic: "titulo10", tags: [], question: "La reforma del Capítulo I del Título II de la Constitución (La Corona), ¿por qué procedimiento debe tramitarse?", options: ["Por el procedimiento ordinario (Art. 167)", "Por el procedimiento agravado (Art. 168) porque afecta al Título II entero", "Mediante Ley Orgánica", "Mediante referéndum consultivo del Art. 92"], correctIndex: 1, article: "Art. 168.1 CE", feedback: "Cuando se propusiere la revisión total de la Constitución o una parcial que afecte al Titulo preliminar, al Capítulo segundo, Sección primera del Título I, o al Título II..." },
+            { id: 202, topic: "titulo10", tags: ["mayorias"], question: "En el procedimiento de reforma agravada (Art. 168), tras la aprobación del principio de reforma, se disuelven las Cortes. Las nuevas Cámaras elegidas deberán primero:", options: ["Aprobar el nuevo texto por mayoría absoluta", "Ratificar la decisión y proceder al estudio del nuevo texto constitucional", "Someter el principio a referéndum", "Nombrar un nuevo Gobierno"], correctIndex: 1, article: "Art. 168.2 CE", feedback: "Las Cámaras elegidas deberán ratificar la decisión y proceder al estudio del nuevo texto constitucional..." },
+            { id: 203, topic: "titulo10", tags: ["mayorias"], question: "El nuevo texto constitucional de la reforma agravada deberá ser aprobado por las nuevas Cámaras por mayoría de:", options: ["Tres quintos de cada Cámara", "Mayoría absoluta", "Dos tercios de cada Cámara", "Unanimidad en el Senado"], correctIndex: 2, article: "Art. 168.2 CE", feedback: "...que deberá ser aprobado por mayoría de dos tercios de ambos Cámaras." }
+        ];
+
+        // ==========================================
+        // ESTADO Y NAVEGACIÓN
+        // ==========================================
+        let appState = {
+            settings: { topic: 'all', mode: 'study' },
+            currentQuestions: [],
+            currentIndex: 0,
+            answers: [],
+            startTime: null,
+            timerInterval: null
+        };
+
+        function navigate(screenId) {
+            document.querySelectorAll('#app-container > div').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`screen-${screenId}`).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        // ==========================================
+        // SISTEMA DE MODALES (Reemplazo de alert/confirm)
+        // ==========================================
+        function showModal(title, text, isConfirm, onConfirmCallback = null) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-text').innerText = text;
+            
+            const btnCancel = document.getElementById('modal-btn-cancel');
+            const btnConfirm = document.getElementById('modal-btn-confirm');
+            const modal = document.getElementById('custom-modal');
+
+            if (isConfirm) {
+                btnCancel.classList.remove('hidden');
+                document.getElementById('modal-icon').className = "fas fa-question-circle text-4xl sm:text-5xl text-blue-500 mb-4 drop-shadow-sm";
+            } else {
+                btnCancel.classList.add('hidden');
+                document.getElementById('modal-icon').className = "fas fa-exclamation-triangle text-4xl sm:text-5xl text-yellow-500 mb-4 drop-shadow-sm";
+            }
+
+            modal.classList.remove('hidden');
+
+            btnConfirm.onclick = () => {
+                modal.classList.add('hidden');
+                if(onConfirmCallback) onConfirmCallback();
+            };
+
+            btnCancel.onclick = () => {
+                modal.classList.add('hidden');
+            };
+        }
+
+        function confirmExit() {
+            showModal("¿Finalizar test?", "¿Quieres detener el test y volver al menú principal? Perderás el progreso actual.", true, () => {
+                if(appState.timerInterval) clearInterval(appState.timerInterval);
+                navigate('setup');
+            });
+        }
+
+        function selectMode(mode) {
+            document.getElementById('label-mode-study').className = "flex items-center p-4 sm:p-5 border-2 rounded-2xl cursor-pointer transition border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800";
+            document.getElementById('label-mode-exam').className = "flex items-center p-4 sm:p-5 border-2 rounded-2xl cursor-pointer transition border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800";
+            
+            if(mode === 'study') {
+                document.getElementById('label-mode-study').className = "flex items-center p-4 sm:p-5 border-2 rounded-2xl cursor-pointer transition border-blue-500 bg-blue-50 dark:bg-blue-900/30 dark:border-blue-400";
+            } else {
+                document.getElementById('label-mode-exam').className = "flex items-center p-4 sm:p-5 border-2 rounded-2xl cursor-pointer transition border-red-500 bg-red-50 dark:bg-red-900/30 dark:border-red-400";
+            }
+            appState.settings.mode = mode;
+        }
+
+        function startQuiz(repeat = false) {
+            if (!repeat) {
+                appState.settings.topic = document.getElementById('config-topic').value;
+            }
+
+            let pool = [];
+            const t = appState.settings.topic;
+
+            if (t === 'all') {
+                pool = [...questionDatabase];
+            } else if (t === 'plazos' || t === 'mayorias') {
+                pool = questionDatabase.filter(q => q.tags && q.tags.includes(t));
+            } else {
+                pool = questionDatabase.filter(q => q.topic === t);
+            }
+
+            if (pool.length === 0) return showModal("Sin preguntas", "Aún no hay suficientes preguntas cargadas para esta categoría.", false);
+
+            pool = pool.sort(() => Math.random() - 0.5).slice(0, 20);
+
+            appState.currentQuestions = pool.map(q => {
+                let optionsWithIndex = q.options.map((opt, idx) => ({ text: opt, isCorrect: idx === q.correctIndex }));
+                optionsWithIndex = optionsWithIndex.sort(() => Math.random() - 0.5);
+                return {
+                    ...q,
+                    shuffledOptions: optionsWithIndex,
+                    correctShuffledIndex: optionsWithIndex.findIndex(o => o.isCorrect)
+                };
+            });
+
+            appState.currentIndex = 0;
+            appState.answers = new Array(pool.length).fill(null);
+            
+            document.getElementById('total-q-num').innerText = pool.length;
+            document.getElementById('quiz-topic-display').innerText = getTopicName(t);
+            
+            if (appState.settings.mode === 'exam') {
+                document.getElementById('timer-display').classList.remove('hidden');
+                appState.startTime = Date.now();
+                appState.timerInterval = setInterval(updateTimer, 1000);
+            } else {
+                document.getElementById('timer-display').classList.add('hidden');
+            }
+
+            navigate('quiz');
+            renderQuestion();
+        }
+
+        function getTopicName(val) {
+            const select = document.getElementById('config-topic');
+            const option = Array.from(select.options).find(o => o.value === val);
+            return option ? option.text.replace(/🔶|⏱️|⚖️|🌐/g, '').trim() : val;
+        }
+
+        function renderQuestion() {
+            const q = appState.currentQuestions[appState.currentIndex];
+            
+            document.getElementById('current-q-num').innerText = appState.currentIndex + 1;
+            const progress = ((appState.currentIndex) / appState.currentQuestions.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+
+            document.getElementById('question-text').innerText = q.question;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            q.shuffledOptions.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 sm:p-5 rounded-2xl border-2 border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-gray-700 transition font-semibold text-gray-700 dark:text-gray-200 option-btn text-base sm:text-lg flex items-center min-h-[70px]";
+                btn.innerHTML = `<span class="shrink-0 w-8 h-8 rounded-full bg-white dark:bg-gray-900 text-center leading-8 mr-3 sm:mr-4 font-black text-gray-400 dark:text-gray-500 border border-gray-200 dark:border-gray-700 shadow-sm">${String.fromCharCode(65+index)}</span> <span class="flex-grow">${opt.text}</span>`;
+                btn.onclick = () => selectAnswer(index);
+                container.appendChild(btn);
+            });
+
+            document.getElementById('feedback-container').classList.add('hidden');
+            document.getElementById('btn-next').classList.add('hidden');
+            document.getElementById('btn-finish').classList.add('hidden');
+
+            if(appState.settings.mode === 'exam') {
+                const isLast = appState.currentIndex === appState.currentQuestions.length - 1;
+                const skipBtn = document.createElement('button');
+                skipBtn.className = "text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 underline font-bold px-4 py-4 w-full text-center block text-sm transition mt-2 active:scale-95";
+                skipBtn.innerText = "Dejar en blanco y continuar";
+                skipBtn.onclick = () => {
+                    appState.answers[appState.currentIndex] = { selected: null, correct: false, blank: true };
+                    isLast ? finishQuiz() : nextQuestion();
+                };
+                container.appendChild(skipBtn);
+            }
+        }
+
+        function selectAnswer(selectedIndex) {
+            const q = appState.currentQuestions[appState.currentIndex];
+            const isCorrect = selectedIndex === q.correctShuffledIndex;
+            
+            appState.answers[appState.currentIndex] = { selected: selectedIndex, correct: isCorrect, blank: false };
+
+            const btns = document.querySelectorAll('.option-btn');
+            
+            if (appState.settings.mode === 'study') {
+                btns.forEach(b => b.classList.add('disabled-option')); 
+                
+                btns[q.correctShuffledIndex].classList.remove('bg-gray-50', 'dark:bg-gray-800', 'border-gray-100', 'dark:border-gray-700');
+                btns[q.correctShuffledIndex].classList.add('bg-green-100', 'dark:bg-green-900/40', 'border-green-500', 'dark:border-green-500', 'text-green-900', 'dark:text-green-100');
+                
+                if (!isCorrect) {
+                    btns[selectedIndex].classList.remove('bg-gray-50', 'dark:bg-gray-800', 'border-gray-100', 'dark:border-gray-700');
+                    btns[selectedIndex].classList.add('bg-red-100', 'dark:bg-red-900/40', 'border-red-500', 'dark:border-red-500', 'text-red-900', 'dark:text-red-100');
+                }
+
+                document.getElementById('feedback-article').innerText = q.article;
+                document.getElementById('feedback-text').innerText = q.feedback;
+                document.getElementById('feedback-container').classList.remove('hidden');
+
+                if (appState.currentIndex === appState.currentQuestions.length - 1) {
+                    document.getElementById('btn-finish').classList.remove('hidden');
+                } else {
+                    document.getElementById('btn-next').classList.remove('hidden');
+                }
+            } else {
+                btns.forEach(b => {
+                    b.classList.remove('bg-blue-100', 'dark:bg-blue-900/40', 'border-blue-500', 'dark:border-blue-500');
+                    b.classList.add('bg-gray-50', 'dark:bg-gray-800', 'border-gray-100', 'dark:border-gray-700');
+                });
+                
+                btns[selectedIndex].classList.remove('bg-gray-50', 'dark:bg-gray-800', 'border-gray-100', 'dark:border-gray-700');
+                btns[selectedIndex].classList.add('bg-blue-100', 'dark:bg-blue-900/40', 'border-blue-500', 'dark:border-blue-500');
+                
+                if (appState.currentIndex === appState.currentQuestions.length - 1) {
+                    document.getElementById('btn-finish').classList.remove('hidden');
+                } else {
+                    document.getElementById('btn-next').classList.remove('hidden');
+                }
+            }
+        }
+
+        function nextQuestion() {
+            appState.currentIndex++;
+            renderQuestion();
+        }
+
+        function finishQuiz() {
+            if(appState.timerInterval) clearInterval(appState.timerInterval);
+            
+            let corrects = 0, wrongs = 0, blanks = 0;
+
+            appState.answers.forEach((ans) => {
+                if (!ans || ans.blank) blanks++;
+                else if (ans.correct) corrects++;
+                else wrongs++;
+            });
+
+            const totalQ = appState.currentQuestions.length;
+            const nota10 = (corrects / totalQ) * 10;
+
+            document.getElementById('res-correct').innerText = corrects;
+            document.getElementById('res-wrong').innerText = wrongs;
+            document.getElementById('res-blank').innerText = blanks;
+            document.getElementById('res-score').innerText = nota10.toFixed(2);
+
+            let scoreColor = nota10 >= 5 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400';
+            document.getElementById('res-score').className = `text-6xl font-black ${scoreColor}`;
+
+            if(appState.settings.mode === 'exam') {
+                document.getElementById('result-mode-text').innerText = `Tiempo empleado: ${document.getElementById('timer-display').innerText}`;
+            } else {
+                document.getElementById('result-mode-text').innerText = "Repaso finalizado con éxito.";
+            }
+
+            renderReview();
+            navigate('results');
+            document.getElementById('progress-bar').style.width = `100%`;
+        }
+
+        function renderReview() {
+            const container = document.getElementById('review-container');
+            container.innerHTML = '';
+
+            appState.currentQuestions.forEach((q, i) => {
+                const ans = appState.answers[i];
+                const div = document.createElement('div');
+                div.className = "bg-white dark:bg-gray-800 border-2 rounded-2xl p-4 sm:p-5 shadow-sm text-left relative overflow-hidden";
+                
+                let icon = '';
+                let borderClass = '';
+                let bgRibbon = '';
+                
+                if(!ans || ans.blank) {
+                    icon = '<i class="fas fa-minus-circle text-gray-400 dark:text-gray-500 text-2xl mr-3 mt-1 shrink-0"></i>';
+                    borderClass = 'border-gray-200 dark:border-gray-700';
+                    bgRibbon = '<div class="absolute left-0 top-0 bottom-0 w-2 bg-gray-300 dark:bg-gray-600"></div>';
+                } else if(ans.correct) {
+                    icon = '<i class="fas fa-check-circle text-green-500 dark:text-green-400 text-2xl mr-3 mt-1 shrink-0"></i>';
+                    borderClass = 'border-green-200 dark:border-green-800/50';
+                    bgRibbon = '<div class="absolute left-0 top-0 bottom-0 w-2 bg-green-500 dark:bg-green-500"></div>';
+                } else {
+                    icon = '<i class="fas fa-times-circle text-red-500 dark:text-red-400 text-2xl mr-3 mt-1 shrink-0"></i>';
+                    borderClass = 'border-red-200 dark:border-red-800/50';
+                    bgRibbon = '<div class="absolute left-0 top-0 bottom-0 w-2 bg-red-500 dark:bg-red-500"></div>';
+                }
+                div.classList.add(...borderClass.split(' '));
+
+                const correctText = q.shuffledOptions[q.correctShuffledIndex].text;
+                const userText = (ans && !ans.blank && ans.selected !== null) ? q.shuffledOptions[ans.selected].text : "No respondida";
+
+                let html = `
+                    ${bgRibbon}
+                    <div class="flex items-start mb-4 pl-3 sm:pl-4">
+                        ${icon}
+                        <p class="font-bold text-gray-800 dark:text-white text-base sm:text-lg">${i+1}. ${q.question}</p>
+                    </div>
+                    <div class="pl-10 sm:pl-12 space-y-3 text-sm sm:text-base">
+                        <div class="p-3 sm:p-4 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800/50 text-green-900 dark:text-green-100 font-medium">
+                            <span class="font-bold uppercase text-[10px] sm:text-xs text-green-700 dark:text-green-400 block mb-1">Respuesta correcta</span> 
+                            ${correctText}
+                        </div>
+                `;
+
+                if(!ans || !ans.correct) {
+                    html += `
+                        <div class="p-3 sm:p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800/50 text-red-900 dark:text-red-100">
+                            <span class="font-bold uppercase text-[10px] sm:text-xs text-red-700 dark:text-red-400 block mb-1">Tu respuesta</span> 
+                            ${userText}
+                        </div>
+                    `;
+                }
+
+                html += `
+                        <div class="mt-4 text-gray-700 dark:text-gray-200 bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl border border-blue-100 dark:border-blue-800/50">
+                            <strong class="text-blue-800 dark:text-blue-200 bg-blue-200 dark:bg-blue-800 px-2 py-1 rounded text-xs mr-2 shrink-0 inline-block mb-1">${q.article}</strong> 
+                            <span class="font-medium">${q.feedback}</span>
+                        </div>
+                    </div>
+                `;
+
+                div.innerHTML = html;
+                container.appendChild(div);
+            });
+        }
+
+        function updateTimer() {
+            const now = Date.now();
+            const diff = Math.floor((now - appState.startTime) / 1000);
+            const m = Math.floor(diff / 60).toString().padStart(2, '0');
+            const s = (diff % 60).toString().padStart(2, '0');
+            document.getElementById('timer-display').innerText = `${m}:${s}`;
+        }
+    </script>
+</body>
+</html>
